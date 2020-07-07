@@ -1,16 +1,13 @@
 <template>
   <div>
-    <div v-if="loading">
-      Carregando...
-    </div>
+    <div v-if="loading">Carregando...</div>
     <div v-else>
       <div v-for="categoria in categorias" :key="categoria.id">
-        <div v-for="produto in categoria.produtos" :key="produto.id">
-          <button type="button" @click="verProduto(produto)">
-            {{ produto.nome }}
-            {{ produto.descricao }}
-          </button>
-        </div>
+        <card-produto
+          v-for="produto in categoria.produtos"
+          :key="produto.id"
+          :produto="produto"
+        />
       </div>
       <div class="tabs">
         <div class="tabs__item" @click="goToCarrinho">
@@ -25,9 +22,12 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex'
+import CardProduto from '@/components/menu/CardProduto'
 export default {
   name: 'Menu',
-  components: {},
+  components: {
+    CardProduto
+  },
   props: {},
   computed: {
     ...mapState({
