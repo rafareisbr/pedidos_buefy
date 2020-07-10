@@ -4,6 +4,7 @@ export default {
   state: () => ({
     estabelecimento: {},
     categorias: [],
+    destaques: [],
     error: null,
     loading: true
   }),
@@ -16,7 +17,10 @@ export default {
           commit('SET_ESTABELECIMENTO', estabelecimento.data)
           EstabelecimentoService.getCategorias().then((categorias) => {
             commit('SET_CATEGORIAS', categorias.data)
-            commit('SET_LOADING', false)
+            EstabelecimentoService.getDestaques().then((destaques) => {
+              commit('SET_DESTAQUES', destaques.data)
+              commit('SET_LOADING', false)
+            })
           })
         })
         .catch((err) => {
@@ -36,6 +40,9 @@ export default {
     SET_CATEGORIAS(state, categorias) {
       state.categorias = categorias
     },
+    SET_DESTAQUES(state, destaques) {
+      state.destaques = destaques
+    },
     SET_FETCH_ERROR(state, error) {
       state.error = error
     }
@@ -48,6 +55,10 @@ export default {
 
     categorias(state) {
       return state.categorias
+    },
+
+    destaques(state) {
+      return state.destaques
     },
 
     loading(state) {

@@ -26,6 +26,7 @@
     "@nuxtjs/dotenv": "^1.4.0",
     "@nuxtjs/proxy": "^2.0.0",
     "@nuxtjs/pwa": "^3.0.0-0",
+    "moment": "^2.27.0",
     "nuxt": "^2.0.0",
     "nuxt-buefy": "^0.3.2",
     "pug": "^3.0.0",

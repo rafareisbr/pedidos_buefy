@@ -15,5 +15,8 @@ export default {
   },
   getCategorias() {
     return apiClient.get('/categorias')
+  },
+  getDestaques() {
+    return apiClient.get('/destaques')
   }
 }
