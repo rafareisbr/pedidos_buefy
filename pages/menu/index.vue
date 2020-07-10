@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="loading">Carregando...</div>
-    <div v-else>
+    <div v-else class="container">
       <!-- estabelecimento -->
       <div>
         <div class="nomenota">
@@ -32,7 +32,7 @@
       </div>
       <!-- /estabelecimento -->
       <!-- destaques -->
-      <h4>Em</h4>
+      <h4>Em destaque</h4>
       <card-produto
         v-for="destaque in destaques"
         :key="destaque.id"

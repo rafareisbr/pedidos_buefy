@@ -33,8 +33,8 @@
       </template>
     </b-navbar>
 
-    <section class="main-content columns">
-      <div class="container column">
+    <section class="main-content">
+      <div class="container">
         <nuxt />
       </div>
     </section>
