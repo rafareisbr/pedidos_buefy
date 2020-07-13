@@ -7259,6 +7259,11 @@ markdown-table@^1.1.0:
   resolved "https://registry.yarnpkg.com/markdown-table/-/markdown-table-1.1.3.tgz#9fcb69bcfdb8717bfd0398c6ec2d93036ef8de60"
   integrity sha512-1RUZVgQlpJSPWYbFSpmudq5nHY1doEIv89gBtF0s4gW1GF2XorxcA/70M5vq7rLv0a6mhOUccRsqkwhwLCIQ2Q==
 
+material-design-icons@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/material-design-icons/-/material-design-icons-3.0.1.tgz#9a71c48747218ebca51e51a66da682038cdcb7bf"
+  integrity sha1-mnHEh0chjrylHlGmbaaCA4zct78=
+
 mathml-tag-names@^2.1.0:
   version "2.1.3"
   resolved "https://registry.yarnpkg.com/mathml-tag-names/-/mathml-tag-names-2.1.3.tgz#4ddadd67308e780cf16a47685878ee27b736a0a3"
@@ -7865,6 +7870,13 @@ nuxt-buefy@^0.3.2:
   integrity sha512-nO2xd56fizUlNK86D9VRB9DdGq2ekYqDEhBACaQ9XwE16JwCPnV+nLObI/+RkiQNAQM4P12dIqAtbHHgfT6dVw==
   dependencies:
     buefy "^0.8.20"
+
+nuxt-material-design-icons@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/nuxt-material-design-icons/-/nuxt-material-design-icons-1.0.4.tgz#88fad0f7ff10ed9dab281d7510d6f6ab643bc8d2"
+  integrity sha512-1DwI3n7zLIMO+dV87JUSohhF6yFtIXyzBZ15YLQYSDEQWFBpo/3k1excO1dooaaGVJFS4ObnOCreiy4Xov4t/A==
+  dependencies:
+    material-design-icons "^3.0.1"
 
 nuxt@^2.0.0:
   version "2.12.2"

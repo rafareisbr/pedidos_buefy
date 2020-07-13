@@ -18,6 +18,21 @@
     <swiper-slide>
       <card-destaques></card-destaques>
     </swiper-slide>
+    <swiper-slide>
+      <card-destaques></card-destaques>
+    </swiper-slide>
+    <swiper-slide>
+      <card-destaques></card-destaques>
+    </swiper-slide>
+    <swiper-slide>
+      <card-destaques></card-destaques>
+    </swiper-slide>
+    <swiper-slide>
+      <card-destaques></card-destaques>
+    </swiper-slide>
+    <swiper-slide>
+      <card-destaques></card-destaques>
+    </swiper-slide>
   </swiper>
 </template>
 
@@ -36,7 +51,7 @@ export default {
     return {
       swiperOption: {
         slidesPerView: 'auto',
-        spaceBetween: 30
+        spaceBetween: 20
       }
     }
   }

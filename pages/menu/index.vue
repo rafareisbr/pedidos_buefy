@@ -44,17 +44,25 @@
       <div class="column">
         <!-- destaques -->
         <div class="destaques">
-          <h4 class="">Em destaque</h4>
+          <h4 class="is-size-4">Em destaque</h4>
           <swiper-destaques></swiper-destaques>
         </div>
         <!-- /destaques -->
 
         <!-- produtos -->
         <div class="produtos">
-          <h4>Produtos (Listagem)</h4>
-          <div v-for="categoria in categorias" :key="categoria.id">
-            <h4>{{ categoria.nome }}</h4>
-            Produtos
+          <div
+            v-for="categoria in categorias"
+            :key="categoria.nome"
+            class="produto-categoria"
+          >
+            <h4 class="is-size-5" style="margin-bottom: 0.8rem;">
+              {{ categoria.nome }}
+            </h4>
+            <card-produto
+              v-for="produto in categoria.produtos"
+              :key="produto.id"
+            ></card-produto>
           </div>
         </div>
         <!-- /produtos -->
@@ -77,12 +85,14 @@
 import moment from 'moment'
 import { mapState, mapGetters } from 'vuex'
 
+import CardProduto from '@/components/menu/CardProduto'
 import SwiperCategorias from '@/components/menu/SwiperCategorias'
 import SwiperDestaques from '@/components/menu/SwiperDestaques'
 
 export default {
   name: 'Menu',
   components: {
+    CardProduto,
     SwiperCategorias,
     SwiperDestaques
   },
@@ -148,7 +158,7 @@ export default {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  height: 130px;
+  height: 100px;
 }
 .nomenota {
   padding-top: 20px;
@@ -186,6 +196,10 @@ export default {
     grid-area: horarios;
     text-align: right;
   }
+}
+
+.produto-categoria {
+  margin-bottom: 2rem;
 }
 
 .tag {

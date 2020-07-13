@@ -29,6 +29,7 @@
     "moment": "^2.27.0",
     "nuxt": "^2.0.0",
     "nuxt-buefy": "^0.3.2",
+    "nuxt-material-design-icons": "^1.0.4",
     "pug": "^3.0.0",
     "pug-plain-loader": "^1.0.0",
     "swiper": "^6.0.2",
