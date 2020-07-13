@@ -36,7 +36,7 @@
 
         <!-- swiper -->
         <div class="column">
-          <swiper-categorias height="30px"></swiper-categorias>
+          <swiper-categorias height="30px" :categorias="categorias"></swiper-categorias>
         </div>
         <!-- /swiper -->
       </div>
@@ -45,7 +45,7 @@
         <!-- destaques -->
         <div class="destaques">
           <h4 class="is-size-4">Em destaque</h4>
-          <swiper-destaques></swiper-destaques>
+          <swiper-destaques :destaques="destaques"></swiper-destaques>
         </div>
         <!-- /destaques -->
 
@@ -61,6 +61,7 @@
             </h4>
             <card-produto
               v-for="produto in categoria.produtos"
+              :produto="produto"
               :key="produto.id"
             ></card-produto>
           </div>

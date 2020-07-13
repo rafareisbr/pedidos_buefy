@@ -11,10 +11,15 @@
         class=""
         style="padding-left: 1rem; padding-top: 0.5rem; padding-bottom: 0.5rem;"
       >
-        <div class="is-7">Cone mix trufado</div>
-        <div style="font-size: 0.8rem;">Chocolate belga</div>
+        <div class="is-7">{{ produto.nome }}</div>
+        <div style="font-size: 0.8rem;">{{ produto.descricao }}</div>
         <div class="valores">
-          <div style="font-size: 0.8rem; margin-right: 1.5rem;">De R$19.90</div>
+          <div
+            v-if="produto.valor_original !== produto.valor_atual"
+            style="font-size: 0.8rem; margin-right: 1.5rem;"
+          >
+            De R$19.90
+          </div>
           <div style="font-size: 0.8rem;">Por R$15.00</div>
         </div>
       </div>
@@ -29,7 +34,12 @@
 
 <script>
 export default {
-  props: {}
+  props: {
+    produto: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>
 

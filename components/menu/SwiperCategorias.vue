@@ -1,15 +1,11 @@
 <template>
   <swiper class="swiper" :options="swiperOption">
-    <swiper-slide class="tag">Todos</swiper-slide>
-    <swiper-slide class="tag">Torta no pote</swiper-slide>
-    <swiper-slide class="tag">Petisqueiras</swiper-slide>
-    <swiper-slide class="tag">Mini Casquinha</swiper-slide>
-    <swiper-slide class="tag">Slide 5</swiper-slide>
-    <swiper-slide class="tag">Slide 6</swiper-slide>
-    <swiper-slide class="tag">Slide 7</swiper-slide>
-    <swiper-slide class="tag">Slide 8</swiper-slide>
-    <swiper-slide class="tag">Slide 9</swiper-slide>
-    <swiper-slide class="tag">Slide 10</swiper-slide>
+    <swiper-slide
+      v-for="categoria of categorias"
+      :key="categoria.nome"
+      class="tag"
+      >{{ categoria.nome }}</swiper-slide
+    >
   </swiper>
 </template>
 
@@ -21,6 +17,12 @@ export default {
   components: {
     Swiper,
     SwiperSlide
+  },
+  props: {
+    categorias: {
+      type: Array,
+      default: () => []
+    }
   },
   data() {
     return {

@@ -1,37 +1,7 @@
 <template>
   <swiper class="swiper" :options="swiperOption">
-    <swiper-slide>
-      <card-destaques></card-destaques>
-    </swiper-slide>
-    <swiper-slide>
-      <card-destaques></card-destaques>
-    </swiper-slide>
-    <swiper-slide>
-      <card-destaques></card-destaques>
-    </swiper-slide>
-    <swiper-slide>
-      <card-destaques></card-destaques>
-    </swiper-slide>
-    <swiper-slide>
-      <card-destaques></card-destaques>
-    </swiper-slide>
-    <swiper-slide>
-      <card-destaques></card-destaques>
-    </swiper-slide>
-    <swiper-slide>
-      <card-destaques></card-destaques>
-    </swiper-slide>
-    <swiper-slide>
-      <card-destaques></card-destaques>
-    </swiper-slide>
-    <swiper-slide>
-      <card-destaques></card-destaques>
-    </swiper-slide>
-    <swiper-slide>
-      <card-destaques></card-destaques>
-    </swiper-slide>
-    <swiper-slide>
-      <card-destaques></card-destaques>
+    <swiper-slide v-for="destaque of destaques" :key="destaque.id">
+      <card-destaques :destaque="destaque"></card-destaques>
     </swiper-slide>
   </swiper>
 </template>
@@ -46,6 +16,12 @@ export default {
     Swiper,
     SwiperSlide,
     CardDestaques
+  },
+  props: {
+    destaques: {
+      type: Array,
+      default: () => []
+    }
   },
   data() {
     return {
