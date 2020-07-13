@@ -30,7 +30,10 @@
     "nuxt": "^2.0.0",
     "nuxt-buefy": "^0.3.2",
     "pug": "^3.0.0",
-    "pug-plain-loader": "^1.0.0"
+    "pug-plain-loader": "^1.0.0",
+    "swiper": "^6.0.2",
+    "vue-awesome-swiper": "^4.1.1",
+    "vue-horizontal-list": "^1.0.11"
   },
   "devDependencies": {
     "@nuxt/typescript-build": "^0.6.0",

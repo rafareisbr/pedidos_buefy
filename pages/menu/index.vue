@@ -1,60 +1,73 @@
 <template>
   <div>
     <div v-if="loading">Carregando...</div>
-    <div v-else class="container">
+    <div v-else>
       <!-- estabelecimento -->
       <div>
-        <div class="nomenota">
-          <h4 class="nomenota__nome">{{ estabelecimento.nm_fantasia }}</h4>
+        <div class="cardapio__imagem"></div>
+        <div class="nomenota column">
+          <h4 class="nomenota__nome" style="font-weight: 700">
+            {{ estabelecimento.nm_fantasia }}
+          </h4>
           <p class="nomenota__bio">{{ estabelecimento.bio }}</p>
-          <p class="nomenota__nota">
+          <p class="nomenota__nota is-size-4">
             {{ estabelecimento.nota_avaliacoes | nota }}
           </p>
         </div>
 
-        <div>
+        <div class="column">
           <div v-for="tag in estabelecimento.tags" :key="tag" class="tag">
             {{ tag }}
           </div>
         </div>
 
-        <div class="abertotxentregahorarios">
-          <div class="abertotxentregahorarios__aberto">Aberto Agora</div>
+        <div class="abertotxentregahorarios column">
+          <div class="abertotxentregahorarios__aberto">Aberto agora</div>
           <div class="abertotxentregahorarios__tx_entrega">
             {{ 'R$ ' + estabelecimento.min_taxa_entrega }} -
             {{ 'R$ ' + estabelecimento.max_taxa_entrega }}
           </div>
           <div class="abertotxentregahorarios__horarios">
-            {{ estabelecimento.funcionamento_hoje[0].hr_inicial | horario }} às
+            {{ estabelecimento.funcionamento_hoje[0].hr_inicial | horario }}
+            às
             {{ estabelecimento.funcionamento_hoje[0].hr_final | horario }}
           </div>
         </div>
+
+        <!-- swiper -->
+        <div class="column">
+          <swiper-categorias height="30px"></swiper-categorias>
+        </div>
+        <!-- /swiper -->
       </div>
       <!-- /estabelecimento -->
-      <!-- destaques -->
-      <h4>Em destaque</h4>
-      <card-produto
-        v-for="destaque in destaques"
-        :key="destaque.id"
-        :produto="destaque"
-      />
-      <!-- /destaques -->
-      <br />
-      <h4>produtos</h4>
-      <div v-for="categoria in categorias" :key="categoria.id">
-        <h4>{{ categoria.nome }}</h4>
-        <card-produto
-          v-for="produto in categoria.produtos"
-          :key="produto.id"
-          :produto="produto"
-        />
-      </div>
-      <div class="tabs">
-        <div class="tabs__item" @click="goToCarrinho">
-          <div v-if="carrinho && carrinho.length" class="badge">
-            {{ carrinho.length }}
+      <div class="column">
+        <!-- destaques -->
+        <div class="destaques">
+          <h4 class="">Em destaque</h4>
+          <swiper-destaques></swiper-destaques>
+        </div>
+        <!-- /destaques -->
+
+        <!-- produtos -->
+        <div class="produtos">
+          <h4>Produtos (Listagem)</h4>
+          <div v-for="categoria in categorias" :key="categoria.id">
+            <h4>{{ categoria.nome }}</h4>
+            Produtos
           </div>
         </div>
+        <!-- /produtos -->
+
+        <!-- tabs -->
+        <div class="tabs">
+          <div class="tabs__item" @click="goToCarrinho">
+            <div v-if="carrinho && carrinho.length" class="badge">
+              {{ carrinho.length }}
+            </div>
+          </div>
+        </div>
+        <!-- /tabs -->
       </div>
     </div>
   </div>
@@ -63,11 +76,15 @@
 <script>
 import moment from 'moment'
 import { mapState, mapGetters } from 'vuex'
-import CardProduto from '@/components/menu/CardProduto'
+
+import SwiperCategorias from '@/components/menu/SwiperCategorias'
+import SwiperDestaques from '@/components/menu/SwiperDestaques'
+
 export default {
   name: 'Menu',
   components: {
-    CardProduto
+    SwiperCategorias,
+    SwiperDestaques
   },
   filters: {
     horario: (value) => {
@@ -80,6 +97,18 @@ export default {
     }
   },
   props: {},
+  data() {
+    return {
+      swiperOption: {
+        slidesPerView: 'auto',
+        spaceBetween: 30,
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true
+        }
+      }
+    }
+  },
   computed: {
     ...mapState({
       carrinho: 'carrinho/carrinho'
@@ -104,44 +133,32 @@ export default {
       this.$router.push({
         path: '/cliente/carrinho'
       })
+    },
+    getImgUrl(value) {
+      return `https://picsum.photos/id/43${value}/1230/500`
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.tabs {
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-  font-size: 20px;
-  &__item {
-    position: relative;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .badge {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: red;
-    color: white;
-    height: 20px;
-    width: 20px;
-    bottom: 10px;
-    right: 43%;
-    border-radius: 50px;
-    z-index: 0;
-    font-size: 13px;
-  }
+.cardapio__imagem {
+  background: url(https://picsum.photos/150/300) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 130px;
 }
-
 .nomenota {
+  padding-top: 20px;
+  margin-top: -20px;
+  background-color: white;
+  border-top-left-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
+
   display: grid;
-  grid-template-areas: 'nome .' 'bio nota';
+  grid-template-areas: 'nome nota' 'bio nota';
   &__nome {
     grid-area: nome;
   }
@@ -150,20 +167,30 @@ export default {
   }
   &__nota {
     grid-area: nota;
+    text-align: right;
   }
 }
 
 .abertotxentregahorarios {
   display: grid;
   grid-template-areas: '. aberto' 'txentrega horarios';
+  font-weight: 300;
   &__aberto {
     grid-area: aberto;
+    text-align: right;
   }
-  &__txentrega {
+  &__tx_entrega {
     grid-area: txentrega;
   }
   &__horarios {
     grid-area: horarios;
+    text-align: right;
   }
+}
+
+.tag {
+  background-color: rgb(255, 173, 173);
+  color: rgb(241, 38, 38);
+  margin-right: 0.5rem;
 }
 </style>

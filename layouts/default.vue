@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-navbar transparent fixed-top>
+    <b-navbar transparent fixed-top type="is-danger">
       <template slot="brand">
         <b-navbar-item tag="router-link" :to="{ path: '/' }">
           <img

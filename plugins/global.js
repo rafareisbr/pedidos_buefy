@@ -1,5 +1,5 @@
-/*
 import Vue from 'vue'
+/*
 
 import BaseButton from '@/components/Global/BaseButton'
 import BaseIcon from '@/components/Global/BaseIcon'
