@@ -12,16 +12,13 @@ export default {
   actions: {
     fetchEstabelecimentoCategorias({ commit }) {
       commit('SET_LOADING', true)
-      EstabelecimentoService.getEstabelecimento()
-        .then((estabelecimento) => {
-          commit('SET_ESTABELECIMENTO', estabelecimento.data)
-          EstabelecimentoService.getCategorias().then((categorias) => {
-            commit('SET_CATEGORIAS', categorias.data)
-            EstabelecimentoService.getDestaques().then((destaques) => {
-              commit('SET_DESTAQUES', destaques.data)
-              commit('SET_LOADING', false)
-            })
-          })
+      EstabelecimentoService.getCardapio()
+        .then((resposta) => {
+          const dados = resposta.data[0]
+          commit('SET_ESTABELECIMENTO', dados.estabelecimento)
+          commit('SET_CATEGORIAS', dados.categorias)
+          commit('SET_DESTAQUES', dados.destaques)
+          commit('SET_LOADING', false)
         })
         .catch((err) => {
           commit('SET_FETCH_ERROR', err)

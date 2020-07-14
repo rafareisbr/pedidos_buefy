@@ -36,7 +36,10 @@
 
         <!-- swiper -->
         <div class="column">
-          <swiper-categorias height="30px" :categorias="categorias"></swiper-categorias>
+          <swiper-categorias
+            height="30px"
+            :categorias="categorias"
+          ></swiper-categorias>
         </div>
         <!-- /swiper -->
       </div>
@@ -61,8 +64,8 @@
             </h4>
             <card-produto
               v-for="produto in categoria.produtos"
-              :produto="produto"
               :key="produto.id"
+              :produto="produto"
             ></card-produto>
           </div>
         </div>
