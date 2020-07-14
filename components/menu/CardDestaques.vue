@@ -4,7 +4,7 @@
       <div class="card-image">
         <figure class="image is-2by1">
           <img
-            src="https://bulma.io/images/placeholders/1280x960.png"
+            src="https://p2.trrsf.com/image/fget/cf/460/0/images.terra.com/2018/07/23/brigadeiro-vegano.jpg"
             alt="Placeholder image"
           />
         </figure>

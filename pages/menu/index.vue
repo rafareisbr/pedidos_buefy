@@ -22,12 +22,18 @@
         </div>
 
         <div class="abertotxentregahorarios column">
-          <div class="abertotxentregahorarios__aberto">Aberto agora</div>
-          <div class="abertotxentregahorarios__tx_entrega">
+          <!-- <div class="abertotxentregahorarios__aberto">Aberto agora</div> -->
+          <div
+            v-if="!estabelecimento.funcionamento_hoje.length === 0"
+            class="abertotxentregahorarios__tx_entrega"
+          >
             {{ 'R$ ' + estabelecimento.min_taxa_entrega }} -
             {{ 'R$ ' + estabelecimento.max_taxa_entrega }}
           </div>
-          <div class="abertotxentregahorarios__horarios">
+          <div v-if="estabelecimento.funcionamento_hoje.length === 0">
+            Fechado hoje
+          </div>
+          <div v-else class="abertotxentregahorarios__horarios">
             {{ estabelecimento.funcionamento_hoje[0].hr_inicial | horario }}
             às
             {{ estabelecimento.funcionamento_hoje[0].hr_final | horario }}

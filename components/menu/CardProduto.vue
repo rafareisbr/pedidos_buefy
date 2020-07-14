@@ -4,7 +4,7 @@
       <img
         height="150px"
         width="100px"
-        src="https://bulma.io/images/placeholders/1280x960.png"
+        src="https://i.pinimg.com/originals/e3/49/af/e349af2e9e68ba152da20f834cc7fa76.jpg"
         alt="Placeholder image"
       />
       <div
