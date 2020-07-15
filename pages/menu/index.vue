@@ -60,6 +60,9 @@
 
         <!-- produtos -->
         <div class="produtos">
+          <swiper-vertical-categorias
+            :categorias="categorias"
+          ></swiper-vertical-categorias>
           <div
             v-for="categoria in categorias"
             :key="categoria.nome"
@@ -98,13 +101,15 @@ import { mapState, mapGetters } from 'vuex'
 import CardProduto from '@/components/menu/CardProduto'
 import SwiperCategorias from '@/components/menu/SwiperCategorias'
 import SwiperDestaques from '@/components/menu/SwiperDestaques'
+import SwiperVerticalCategorias from '@/components/menu/SwiperVerticalCategorias'
 
 export default {
   name: 'Menu',
   components: {
     CardProduto,
     SwiperCategorias,
-    SwiperDestaques
+    SwiperDestaques,
+    SwiperVerticalCategorias
   },
   filters: {
     horario: (value) => {
