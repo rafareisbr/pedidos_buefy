@@ -1,7 +1,7 @@
 @import '~bulma/sass/utilities/_all';
 
 // Set your colors
-$primary: #e32929;
+$primary: #ca0000;
 $primary-invert: findColorInvert($primary);
 $secondary: #ff611d;
 $twitter: #4099ff;
@@ -59,3 +59,10 @@ $link-focus-border: $primary;
 // Import Bulma and Buefy styles
 @import '~bulma';
 @import '~buefy/src/scss/buefy';
+
+.page-enter-active, .page-leave-active {
+  transition: opacity .5s;
+}
+.page-enter, .page-leave-to {
+  opacity: 0;
+}

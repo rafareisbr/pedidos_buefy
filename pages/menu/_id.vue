@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>teste</h1>
     <div v-if="produto">
       <div style="position: relative;">
         <div>
@@ -55,6 +56,7 @@ export default {
   },
   computed: {
     produto() {
+      /*
       const { categorias } = this.$store.state.menu
       let prod = null
       categorias.forEach((categoria) => {
@@ -66,6 +68,8 @@ export default {
       })
       this.defineItens(prod)
       return prod
+      */
+      return null
     }
   },
   methods: {

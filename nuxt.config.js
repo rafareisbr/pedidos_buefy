@@ -25,7 +25,7 @@ export default {
   /*
    ** Global CSS
    */
-  css: [],
+  css: ['assets/scss/main.scss'],
   /*
    ** Plugins to load before mounting the App
    */
@@ -50,6 +50,8 @@ export default {
     // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
 
+    '@nuxtjs/style-resources',
+
     'nuxt-material-design-icons'
   ],
   /*
@@ -72,7 +74,7 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {}
+    extend(config, ctx) { }
   },
 
   router: {
@@ -83,5 +85,9 @@ export default {
         component: resolve(__dirname, 'pages/menu/index.vue')
       })
     }
+  },
+
+  styleResources: {
+    scss: ['./assets/scss/*.scss']
   }
 }
