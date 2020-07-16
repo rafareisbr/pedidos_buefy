@@ -47,6 +47,7 @@
 
 <script>
 export default {
+  transition: 'slide-left',
   components: {},
   data: () => {
     return {

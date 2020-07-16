@@ -24,13 +24,13 @@
         <div class="abertotxentregahorarios column">
           <!-- <div class="abertotxentregahorarios__aberto">Aberto agora</div> -->
           <div
-            v-if="!estabelecimento.funcionamento_hoje.length === 0"
+            v-if="!estabelecimento.funcionamento_hoje && !this.estabelecimento.funcionamento_hoje.length === 0"
             class="abertotxentregahorarios__tx_entrega"
           >
             {{ 'R$ ' + estabelecimento.min_taxa_entrega }} -
             {{ 'R$ ' + estabelecimento.max_taxa_entrega }}
           </div>
-          <div v-if="estabelecimento.funcionamento_hoje.length === 0">
+          <div v-if="estabelecimento.funcionamento_hoje && !this.estabelecimento.funcionamento_hoje.length === 0">
             Fechado hoje
           </div>
           <div v-else class="abertotxentregahorarios__horarios">
@@ -60,9 +60,6 @@
 
         <!-- produtos -->
         <div class="produtos">
-          <swiper-vertical-categorias
-            :categorias="categorias"
-          ></swiper-vertical-categorias>
           <div
             v-for="categoria in categorias"
             :key="categoria.nome"
@@ -215,11 +212,5 @@ export default {
 
 .produto-categoria {
   margin-bottom: 2rem;
-}
-
-.tag {
-  background-color: rgb(255, 173, 173);
-  color: rgb(241, 38, 38);
-  margin-right: 0.5rem;
 }
 </style>

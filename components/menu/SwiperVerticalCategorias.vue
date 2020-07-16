@@ -1,9 +1,16 @@
 <template>
-  <swiper class="swiper" :options="swiperOption">
-    <swiper-slide v-for="destaque of destaques" :key="destaque.id">
-      <card-destaques :destaque="destaque"></card-destaques>
-    </swiper-slide>
-  </swiper>
+  <div id="categorias_swiper">
+    <div id="1">1</div>
+    <div id="2">1</div>
+    <div id="3">1</div>
+    <div id="4">1</div>
+    <div id="5">5</div>
+    <div id="6">1</div>
+    <div id="7">1</div>
+    <div id="seletor">seletor</div>
+    <div id="9">1</div>
+    <div id="10">1</div>
+  </div>
 </template>
 
 <script>
@@ -24,21 +31,22 @@ export default {
     }
   },
   data() {
-    return {
-      swiperOption: {
-        slidesPerView: 'auto',
-        spaceBetween: 20
-      }
+    return {}
+  },
+  methods: {
+    slideTo(element) {
+      this.$scrollTo(element, { container: '#categorias_swiper' })
     }
   }
 }
 </script>
 
-<style lang="scss" scoped>
-.swiper {
-  padding: 1rem 0.2rem;
+<style lang="scss">
+#categorias_swiper {
+  height: 300px;
+  overflow-y: scroll;;
 }
-.swiper-slide {
-  width: fit-content !important;
+#categorias_swiper > * {
+  height: 150px;
 }
 </style>

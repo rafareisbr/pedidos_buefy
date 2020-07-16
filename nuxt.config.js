@@ -49,10 +49,12 @@ export default {
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
-
+    // Using scss globally
     '@nuxtjs/style-resources',
-
-    'nuxt-material-design-icons'
+    // Material Icons embeded
+    'nuxt-material-design-icons',
+    // Vue scroll to
+    ['vue-scrollto/nuxt', { duration: 300 }],
   ],
   /*
    ** Axios module configuration
@@ -74,7 +76,7 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) { }
+    extend(config, ctx) {}
   },
 
   router: {
@@ -87,6 +89,7 @@ export default {
     }
   },
 
+  /** Configuração da biblioteca (plugin) que coloca o scss globalmente */
   styleResources: {
     scss: ['./assets/scss/*.scss']
   }

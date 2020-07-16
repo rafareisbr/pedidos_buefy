@@ -61,8 +61,21 @@ $link-focus-border: $primary;
 @import '~buefy/src/scss/buefy';
 
 .page-enter-active, .page-leave-active {
-  transition: opacity .5s;
+  transition: opacity .3s;
 }
 .page-enter, .page-leave-to {
+  opacity: 0;
+}
+
+.slide-left-enter,
+.slide-right-leave-active {
+  transition: all .3s ease;
+  transform: translateX(-10px);
+  opacity: 0;
+}
+.slide-left-leave-active,
+.slide-right-enter {
+  transition: all .3s ease;
+  transform: translateX(20px);
   opacity: 0;
 }
