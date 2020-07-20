@@ -4,7 +4,9 @@
     <div v-else>
       <!-- estabelecimento -->
       <div class="cardapio__imagem"></div>
-      <div>
+
+      <v-container class="grey lighten-5">
+
         <div class="nomenota column">
           <h4 class="nomenota__nome" style="font-weight: 700">
             {{ estabelecimento.nm_fantasia }}
@@ -15,11 +17,17 @@
           </p>
         </div>
 
-        <div class="">
-          <v-chip v-for="tag in estabelecimento.tags" :key="tag" class="ma-2">
-            {{ tag }}
-          </v-chip>
-        </div>
+        <v-row no-gutters>
+          <v-col
+            v-for="tag in estabelecimento.tags" :key="tag"
+            cols="12"
+            sm="4"
+          >
+            <v-chip class="pa-2">
+              {{ tag }}
+            </v-chip>
+          </v-col>
+        </v-row>
 
         <div class="abertotxentregahorarios">
           <!-- <div class="abertotxentregahorarios__aberto">Aberto agora</div> -->
@@ -49,7 +57,7 @@
           ></swiper-categorias>
         </div>
         <!-- /swiper -->
-      </div>
+      </v-container>
       <!-- /estabelecimento -->
 
       <div v-if="false" class="column">
@@ -85,76 +93,76 @@
 </template>
 
 <script>
-import moment from 'moment'
-import { mapState, mapGetters } from 'vuex'
+  import moment from 'moment'
+  import { mapState, mapGetters } from 'vuex'
 
-import SwiperCategorias from '@/components/menu/SwiperCategorias'
-import SwiperDestaques from '@/components/menu/SwiperDestaques'
-import SwiperVerticalCategorias from '@/components/menu/SwiperVerticalCategorias'
+  import SwiperCategorias from '@/components/menu/SwiperCategorias'
+  import SwiperDestaques from '@/components/menu/SwiperDestaques'
+  import SwiperVerticalCategorias from '@/components/menu/SwiperVerticalCategorias'
 
-export default {
-  name: 'Menu',
-  components: {
-    SwiperCategorias,
-    SwiperDestaques,
-    SwiperVerticalCategorias
-  },
-  filters: {
-    horario: (value) => {
-      if (!value) return '-'
-      return `${moment.utc(value, 'HH:mm:ss').format('HH:mm')}hrs`
+  export default {
+    name: 'Menu',
+    components: {
+      SwiperCategorias,
+      SwiperDestaques,
+      SwiperVerticalCategorias
     },
-    nota: (value) => {
-      if (!value) return '-'
-      return value.toFixed(1)
-    }
-  },
-  props: {},
-  data() {
-    return {
-      swiperOption: {
-        slidesPerView: 'auto',
-        spaceBetween: 30,
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true
+    filters: {
+      horario: (value) => {
+        if (!value) return '-'
+        return `${moment.utc(value, 'HH:mm:ss').format('HH:mm')}hrs`
+      },
+      nota: (value) => {
+        if (!value) return '-'
+        return value.toFixed(1)
+      }
+    },
+    props: {},
+    data() {
+      return {
+        swiperOption: {
+          slidesPerView: 'auto',
+          spaceBetween: 30,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true
+          }
         }
       }
-    }
-  },
-  computed: {
-    ...mapState({
-      carrinho: 'carrinho/carrinho'
-    }),
-    ...mapGetters({
-      categorias: 'estabelecimento/categorias',
-      estabelecimento: 'estabelecimento/estabelecimento',
-      destaques: 'estabelecimento/destaques',
-      loading: 'estabelecimento/loading'
-    })
-  },
-  created() {
-    this.$store.dispatch('estabelecimento/fetchEstabelecimentoCategorias')
-  },
-  methods: {
-    verProduto(produto) {
-      this.$router.push({
-        path: `/menu/${produto.id}`
+    },
+    computed: {
+      ...mapState({
+        carrinho: 'carrinho/carrinho'
+      }),
+      ...mapGetters({
+        categorias: 'estabelecimento/categorias',
+        estabelecimento: 'estabelecimento/estabelecimento',
+        destaques: 'estabelecimento/destaques',
+        loading: 'estabelecimento/loading'
       })
     },
-    goToCarrinho() {
-      this.$router.push({
-        path: '/cliente/carrinho'
-      })
+    created() {
+      this.$store.dispatch('estabelecimento/fetchEstabelecimentoCategorias')
     },
-    getImgUrl(value) {
-      return `https://picsum.photos/id/43${value}/1230/500`
-    },
-    slideTo(categoriaId) {
-      this.$refs.swiperCategorias.slideTo(categoriaId)
+    methods: {
+      verProduto(produto) {
+        this.$router.push({
+          path: `/menu/${produto.id}`
+        })
+      },
+      goToCarrinho() {
+        this.$router.push({
+          path: '/cliente/carrinho'
+        })
+      },
+      getImgUrl(value) {
+        return `https://picsum.photos/id/43${value}/1230/500`
+      },
+      slideTo(categoriaId) {
+        this.$refs.swiperCategorias.slideTo(categoriaId)
+      }
     }
   }
-}
 </script>
 
 <style lang="scss" scoped>

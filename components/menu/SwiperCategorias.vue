@@ -3,7 +3,6 @@
     <swiper-slide
       v-for="categoria of categorias"
       :key="categoria.id"
-      class="tag"
     >
       <v-chip class="ma-2" @click="selecionaCategoria(categoria.nome)">
         {{ categoria.nome }}
@@ -31,7 +30,7 @@ export default {
     return {
       swiperOption: {
         slidesPerView: 'auto',
-        spaceBetween: 20
+        spaceBetween: 10
       }
     }
   },
@@ -48,10 +47,13 @@ export default {
 .swiper-slide {
   width: fit-content !important;
 }
-.tag {
-  background-color: red;
-  color: white;
-  border-radius: 1rem;
-  cursor: pointer;
+.v-chip {
+  border: 1px solid $vermelho-forte;
+  background-color: #fff !important;
+  color: $vermelho-forte !important;
+}
+.v-chip-active {
+  color: $vermelho-fraco !important;
+  background-color: $vermelho-forte !important;
 }
 </style>
