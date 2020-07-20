@@ -28,7 +28,7 @@
           </div>
         </div>
 
-        <client-only>
+        <div>
           <swiper-categorias
             :categorias="[
               { nome: 'Doces' },
@@ -39,7 +39,7 @@
               { nome: 'Guloseimas' }
             ]"
           />
-        </client-only>
+        </div>
       </v-card-text>
     </v-card>
   </div>
@@ -56,12 +56,12 @@ export default {
 
 <style lang="scss" scoped>
 .card-menu {
-  border-top-left-radius: 2em;
-  border-top-right-radius: 2em;
+  border-top-left-radius: 2em !important;
+  border-top-right-radius: 2em !important;
   margin-top: -50px !important;
-  min-height: 100vh;
-  height: 100%;
-  padding-top: 1.5rem;
+  min-height: 100vh !important;
+  height: 100% !important;
+  padding-top: 1.5rem !important;
 }
 .nomenota {
   padding-top: 20px;
