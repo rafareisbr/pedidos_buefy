@@ -2,7 +2,7 @@
   <div id="categorias_swiper">
     <div
       v-for="categoria in categorias"
-      :id="categorias.nome"
+      :id="categoria.nome.replace(/ /g, '')"
       :key="categoria.nome"
       class="produto-categoria"
     >
@@ -15,18 +15,6 @@
         :produto="produto"
       ></card-produto>
     </div>
-    <!--
-      <div id="1">1</div>
-    <div id="2">1</div>
-    <div id="3">1</div>
-    <div id="4">1</div>
-    <div id="5">5</div>
-    <div id="6">1</div>
-    <div id="7">1</div>
-    <div id="seletor">seletor</div>
-    <div id="9">1</div>
-    <div id="10">1</div>
-    -->
   </div>
 </template>
 
@@ -58,7 +46,7 @@ export default {
 <style lang="scss">
 #categorias_swiper {
   height: 300px;
-  overflow-y: scroll;;
+  overflow-y: scroll;
 }
 #categorias_swiper > * {
   height: 150px;

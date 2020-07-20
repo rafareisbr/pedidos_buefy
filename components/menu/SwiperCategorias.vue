@@ -2,10 +2,17 @@
   <swiper class="swiper" :options="swiperOption">
     <swiper-slide
       v-for="categoria of categorias"
-      :key="categoria.nome"
+      :key="categoria.id"
       class="tag"
-      >{{ categoria.nome }}</swiper-slide
     >
+      <div
+        height="100%"
+        width="100%"
+        @click="selecionaCategoria(categoria.nome)"
+      >
+        {{ categoria.nome }}
+      </div>
+    </swiper-slide>
   </swiper>
 </template>
 
@@ -31,6 +38,12 @@ export default {
         spaceBetween: 20
       }
     }
+  },
+  methods: {
+    selecionaCategoria(categoriaNome) {
+      const semEspacos = categoriaNome.replace(/ /g, '')
+      this.$emit('clicked', `#${semEspacos}`)
+    }
   }
 }
 </script>
@@ -43,5 +56,6 @@ export default {
   background-color: red;
   color: white;
   border-radius: 1rem;
+  cursor: pointer;
 }
 </style>
