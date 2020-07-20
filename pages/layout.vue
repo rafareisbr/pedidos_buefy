@@ -28,7 +28,7 @@
           </div>
         </div>
 
-        <div>
+        <client-only>
           <swiper-categorias
             :categorias="[
               { nome: 'Doces' },
@@ -39,7 +39,7 @@
               { nome: 'Guloseimas' }
             ]"
           />
-        </div>
+        </client-only>
       </v-card-text>
     </v-card>
   </div>
