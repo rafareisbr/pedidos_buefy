@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 export default {
-  mode: 'universal',
+  mode: 'spa',
 
   /*
    ** Headers of the page

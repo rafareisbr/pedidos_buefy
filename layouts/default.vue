@@ -1,7 +1,14 @@
 <template>
   <div>
     <v-toolbar dense dark>
-      <v-toolbar-title>L</v-toolbar-title>
+      <v-toolbar-title>
+        <v-img
+          src="../assets/images/LOGO_APP_PIBIBOX.png"
+          aspect-ratio="1.7"
+          height="150px"
+          cover
+        />
+      </v-toolbar-title>
 
       <v-spacer></v-spacer>
 
@@ -17,14 +24,15 @@
 </template>
 
 <script>
-import routesConstants from '@/routes.js'
-export default {
-  data() {
-    return {
-      items: routesConstants.routes
+  import routesConstants from '@/routes.js'
+
+  export default {
+    data() {
+      return {
+        items: routesConstants.routes
+      }
     }
   }
-}
 </script>
 
 <style lang="scss">
