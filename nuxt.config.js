@@ -36,14 +36,14 @@ export default {
   buildModules: [
     '@nuxt/typescript-build',
     // Doc: https://github.com/nuxt-community/stylelint-module
-    '@nuxtjs/stylelint-module'
+    '@nuxtjs/stylelint-module',
+
+    '@nuxtjs/vuetify'
   ],
   /*
    ** Nuxt.js modules
    */
   modules: [
-    // Doc: https://buefy.github.io/#/documentation
-    'nuxt-buefy',
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
@@ -54,7 +54,7 @@ export default {
     // Material Icons embeded
     'nuxt-material-design-icons',
     // Vue scroll to
-    ['vue-scrollto/nuxt', { duration: 300 }],
+    ['vue-scrollto/nuxt', { duration: 300 }]
   ],
   /*
    ** Axios module configuration
@@ -80,6 +80,7 @@ export default {
   },
 
   router: {
+    /*
     extendRoutes(routes, resolve) {
       routes.push({
         name: 'inicio',
@@ -87,6 +88,7 @@ export default {
         component: resolve(__dirname, 'pages/menu/index.vue')
       })
     }
+    */
   },
 
   /** Configuração da biblioteca (plugin) que coloca o scss globalmente */

@@ -45,10 +45,11 @@ export default {
 
 <style lang="scss">
 #categorias_swiper {
-  height: 300px;
+  height: 100%;
   overflow-y: scroll;
 }
 #categorias_swiper > * {
   height: 150px;
+  width: 100%;
 }
 </style>

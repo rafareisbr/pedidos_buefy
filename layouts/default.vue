@@ -1,40 +1,27 @@
 <template>
   <div>
-    <b-navbar transparent fixed-top type="is-primary">
-      <template slot="brand">
-        <b-navbar-item tag="router-link" :to="{ path: '/' }">
-          <img
-            src="https://raw.githubusercontent.com/buefy/buefy/dev/static/img/buefy-logo.png"
-            alt="Lightweight UI components for Vue.js based on Bulma"
-          />
-        </b-navbar-item>
-      </template>
-      <template slot="start">
-        <b-navbar-item
-          v-for="(item, key) of items"
-          :key="key"
-          tag="router-link"
-          :to="item.to"
-          is-active
-        >
-          {{ item.title }}
-        </b-navbar-item>
-      </template>
+    <v-toolbar dense>
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
-      <template slot="end">
-        <b-navbar-item tag="div">
-          <div class="buttons">
-            <a class="button is-primary">
-              <strong>Sign up</strong>
-            </a>
-            <a class="button is-light">Log in</a>
-          </div>
-        </b-navbar-item>
-      </template>
-    </b-navbar>
+      <v-toolbar-title>Title</v-toolbar-title>
 
-    <section class="main-content">
-      <div class="container">
+      <v-spacer></v-spacer>
+
+      <v-btn icon>
+        <v-icon>mdi-magnify</v-icon>
+      </v-btn>
+
+      <v-btn icon>
+        <v-icon>mdi-heart</v-icon>
+      </v-btn>
+
+      <v-btn icon>
+        <v-icon>mdi-dots-vertical</v-icon>
+      </v-btn>
+    </v-toolbar>
+
+    <section>
+      <div>
         <nuxt />
       </div>
     </section>

@@ -5,13 +5,9 @@
       :key="categoria.id"
       class="tag"
     >
-      <div
-        height="100%"
-        width="100%"
-        @click="selecionaCategoria(categoria.nome)"
-      >
+      <v-chip class="ma-2" @click="selecionaCategoria(categoria.nome)">
         {{ categoria.nome }}
-      </div>
+      </v-chip>
     </swiper-slide>
   </swiper>
 </template>

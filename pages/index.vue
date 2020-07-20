@@ -3,8 +3,8 @@
     <div v-if="loading">Carregando...</div>
     <div v-else>
       <!-- estabelecimento -->
+      <div class="cardapio__imagem"></div>
       <div>
-        <div class="cardapio__imagem"></div>
         <div class="nomenota column">
           <h4 class="nomenota__nome" style="font-weight: 700">
             {{ estabelecimento.nm_fantasia }}
@@ -15,13 +15,13 @@
           </p>
         </div>
 
-        <div class="column">
-          <div v-for="tag in estabelecimento.tags" :key="tag" class="tag">
+        <div class="">
+          <v-chip v-for="tag in estabelecimento.tags" :key="tag" class="ma-2">
             {{ tag }}
-          </div>
+          </v-chip>
         </div>
 
-        <div class="abertotxentregahorarios column">
+        <div class="abertotxentregahorarios">
           <!-- <div class="abertotxentregahorarios__aberto">Aberto agora</div> -->
           <div class="abertotxentregahorarios__tx_entrega">
             {{ 'R$ ' + estabelecimento.min_taxa_entrega }} -
@@ -41,7 +41,7 @@
         </div>
 
         <!-- swiper -->
-        <div class="column">
+        <div>
           <swiper-categorias
             height="30px"
             :categorias="categorias"

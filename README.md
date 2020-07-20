@@ -1,7 +1,3 @@
-# pedidos-buefy
-
-> My best Nuxt.js project
-
 ## Build Setup
 
 ```bash
