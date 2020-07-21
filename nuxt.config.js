@@ -25,6 +25,10 @@ export default {
       }
     ]
   },
+
+  css: {
+    extract: false
+  },
   /*
    ** Customize the progress-bar color
    */

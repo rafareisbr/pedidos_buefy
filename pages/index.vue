@@ -6,7 +6,6 @@
       <div class="cardapio__imagem"></div>
 
       <v-container class="grey lighten-5">
-
         <div class="nomenota column">
           <h4 class="nomenota__nome" style="font-weight: 700">
             {{ estabelecimento.nm_fantasia }}
@@ -19,7 +18,8 @@
 
         <v-row no-gutters>
           <v-col
-            v-for="tag in estabelecimento.tags" :key="tag"
+            v-for="tag in estabelecimento.tags"
+            :key="tag"
             cols="12"
             sm="4"
           >
@@ -93,76 +93,76 @@
 </template>
 
 <script>
-  import moment from 'moment'
-  import { mapState, mapGetters } from 'vuex'
+import moment from 'moment'
+import { mapState, mapGetters } from 'vuex'
 
-  import SwiperCategorias from '@/components/menu/SwiperCategorias'
-  import SwiperDestaques from '@/components/menu/SwiperDestaques'
-  import SwiperVerticalCategorias from '@/components/menu/SwiperVerticalCategorias'
+import SwiperCategorias from '@/components/menu/SwiperCategorias'
+import SwiperDestaques from '@/components/menu/SwiperDestaques'
+import SwiperVerticalCategorias from '@/components/menu/SwiperVerticalCategorias'
 
-  export default {
-    name: 'Menu',
-    components: {
-      SwiperCategorias,
-      SwiperDestaques,
-      SwiperVerticalCategorias
+export default {
+  name: 'Menu',
+  components: {
+    SwiperCategorias,
+    SwiperDestaques,
+    SwiperVerticalCategorias
+  },
+  filters: {
+    horario: (value) => {
+      if (!value) return '-'
+      return `${moment.utc(value, 'HH:mm:ss').format('HH:mm')}hrs`
     },
-    filters: {
-      horario: (value) => {
-        if (!value) return '-'
-        return `${moment.utc(value, 'HH:mm:ss').format('HH:mm')}hrs`
-      },
-      nota: (value) => {
-        if (!value) return '-'
-        return value.toFixed(1)
-      }
-    },
-    props: {},
-    data() {
-      return {
-        swiperOption: {
-          slidesPerView: 'auto',
-          spaceBetween: 30,
-          pagination: {
-            el: '.swiper-pagination',
-            clickable: true
-          }
+    nota: (value) => {
+      if (!value) return '-'
+      return value.toFixed(1)
+    }
+  },
+  props: {},
+  data() {
+    return {
+      swiperOption: {
+        slidesPerView: 'auto',
+        spaceBetween: 30,
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true
         }
       }
-    },
-    computed: {
-      ...mapState({
-        carrinho: 'carrinho/carrinho'
-      }),
-      ...mapGetters({
-        categorias: 'estabelecimento/categorias',
-        estabelecimento: 'estabelecimento/estabelecimento',
-        destaques: 'estabelecimento/destaques',
-        loading: 'estabelecimento/loading'
+    }
+  },
+  computed: {
+    ...mapState({
+      carrinho: 'carrinho/carrinho'
+    }),
+    ...mapGetters({
+      categorias: 'estabelecimento/categorias',
+      estabelecimento: 'estabelecimento/estabelecimento',
+      destaques: 'estabelecimento/destaques',
+      loading: 'estabelecimento/loading'
+    })
+  },
+  created() {
+    this.$store.dispatch('estabelecimento/fetchEstabelecimentoCategorias')
+  },
+  methods: {
+    verProduto(produto) {
+      this.$router.push({
+        path: `/menu/${produto.id}`
       })
     },
-    created() {
-      this.$store.dispatch('estabelecimento/fetchEstabelecimentoCategorias')
+    goToCarrinho() {
+      this.$router.push({
+        path: '/cliente/carrinho'
+      })
     },
-    methods: {
-      verProduto(produto) {
-        this.$router.push({
-          path: `/menu/${produto.id}`
-        })
-      },
-      goToCarrinho() {
-        this.$router.push({
-          path: '/cliente/carrinho'
-        })
-      },
-      getImgUrl(value) {
-        return `https://picsum.photos/id/43${value}/1230/500`
-      },
-      slideTo(categoriaId) {
-        this.$refs.swiperCategorias.slideTo(categoriaId)
-      }
+    getImgUrl(value) {
+      return `https://picsum.photos/id/43${value}/1230/500`
+    },
+    slideTo(categoriaId) {
+      this.$refs.swiperCategorias.slideTo(categoriaId)
     }
   }
+}
 </script>
 
 <style lang="scss" scoped>

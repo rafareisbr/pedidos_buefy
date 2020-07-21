@@ -24,19 +24,19 @@
 </template>
 
 <script>
-  import routesConstants from '@/routes.js'
+import routesConstants from '@/routes.js'
 
-  export default {
-    data() {
-      return {
-        items: routesConstants.routes
-      }
+export default {
+  data() {
+    return {
+      items: routesConstants.routes
     }
   }
+}
 </script>
 
 <style lang="scss">
-  .v-toolbar {
-    background-color: #dd0019 !important;
-  }
+.v-toolbar {
+  background-color: #dd0019 !important;
+}
 </style>
