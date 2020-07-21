@@ -18,7 +18,7 @@ export default {
     CardDestaques
   },
   props: {
-    categorias: {
+    destaques: {
       type: Array,
       default: () => []
     }
@@ -26,9 +26,8 @@ export default {
   data() {
     return {
       swiperOption: {
-        direction: 'vertical',
         slidesPerView: 'auto',
-        spaceBetween: 20
+        spaceBetween: 10
       }
     }
   }

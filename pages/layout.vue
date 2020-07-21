@@ -28,8 +28,9 @@
           </div>
         </div>
 
-        <div>
+        <div style="margin-bottom: 2rem;">
           <swiper-categorias
+            height="30px"
             :categorias="[
               { nome: 'Doces' },
               { nome: 'Guloseimas' },
@@ -40,16 +41,84 @@
             ]"
           />
         </div>
+
+        <div class="destaques">
+          <p class="font-g font-regular">Em destaque</p>
+          <swiper-destaques :destaques="destaques"></swiper-destaques>
+        </div>
       </v-card-text>
     </v-card>
   </div>
 </template>
 
 <script>
+import moment from 'moment'
+import { mapState, mapGetters } from 'vuex'
+
 import SwiperCategorias from '@/components/menu/SwiperCategorias'
+import SwiperDestaques from '@/components/menu/SwiperDestaques'
+import SwiperVerticalCategorias from '@/components/menu/SwiperVerticalCategorias'
+
 export default {
   components: {
-    SwiperCategorias
+    SwiperCategorias,
+    SwiperDestaques,
+    SwiperVerticalCategorias
+  },
+  filters: {
+    horario: (value) => {
+      if (!value) return '-'
+      return `${moment.utc(value, 'HH:mm:ss').format('HH:mm')}hrs`
+    },
+    nota: (value) => {
+      if (!value) return '-'
+      return value.toFixed(1)
+    }
+  },
+  props: {},
+  data() {
+    return {
+      swiperOption: {
+        slidesPerView: 'auto',
+        spaceBetween: 30,
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true
+        }
+      }
+    }
+  },
+  computed: {
+    ...mapState({
+      carrinho: 'carrinho/carrinho'
+    }),
+    ...mapGetters({
+      categorias: 'estabelecimento/categorias',
+      estabelecimento: 'estabelecimento/estabelecimento',
+      destaques: 'estabelecimento/destaques',
+      loading: 'estabelecimento/loading'
+    })
+  },
+  created() {
+    this.$store.dispatch('estabelecimento/fetchEstabelecimentoCategorias')
+  },
+  methods: {
+    verProduto(produto) {
+      this.$router.push({
+        path: `/menu/${produto.id}`
+      })
+    },
+    goToCarrinho() {
+      this.$router.push({
+        path: '/cliente/carrinho'
+      })
+    },
+    getImgUrl(value) {
+      return `https://picsum.photos/id/43${value}/1230/500`
+    },
+    slideTo(categoriaId) {
+      this.$refs.swiperCategorias.slideTo(categoriaId)
+    }
   }
 }
 </script>
@@ -63,6 +132,7 @@ export default {
   height: 100% !important;
   padding-top: 1.5rem !important;
 }
+
 .nomenota {
   padding-top: 20px;
   margin-top: -20px;

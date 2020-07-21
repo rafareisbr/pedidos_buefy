@@ -1,7 +1,7 @@
 <template>
   <swiper class="swiper" :options="swiperOption">
     <swiper-slide v-for="categoria of categorias" :key="categoria.id">
-      <v-chip class="ma-2" @click="selecionaCategoria(categoria.nome)">
+      <v-chip @click="selecionaCategoria(categoria.nome)">
         {{ categoria.nome }}
       </v-chip>
     </swiper-slide>

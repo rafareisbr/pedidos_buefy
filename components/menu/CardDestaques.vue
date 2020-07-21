@@ -1,13 +1,11 @@
 <template>
   <div style="position: relative;">
-    <div class="card">
+    <v-card>
       <div class="card-image">
-        <figure class="image is-2by1">
-          <img
-            src="https://p2.trrsf.com/image/fget/cf/460/0/images.terra.com/2018/07/23/brigadeiro-vegano.jpg"
-            alt="Placeholder image"
-          />
-        </figure>
+        <v-img
+          src="https://p2.trrsf.com/image/fget/cf/460/0/images.terra.com/2018/07/23/brigadeiro-vegano.jpg"
+          aspect-ratio="2.1"
+        />
       </div>
       <div class="content">
         <div class="is-6 pb-2">{{ destaque.nome }}</div>
@@ -22,7 +20,7 @@
           <div class="">Por R$15.00</div>
         </div>
       </div>
-    </div>
+    </v-card>
     <div class="card-seta">
       <span class="material-icons">
         keyboard_arrow_right
