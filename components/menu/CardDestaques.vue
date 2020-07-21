@@ -1,6 +1,6 @@
 <template>
   <div style="position: relative;">
-    <v-card>
+    <div class="card">
       <div class="card-image">
         <v-img
           src="https://p2.trrsf.com/image/fget/cf/460/0/images.terra.com/2018/07/23/brigadeiro-vegano.jpg"
@@ -20,7 +20,7 @@
           <div class="">Por R$15.00</div>
         </div>
       </div>
-    </v-card>
+    </div>
     <div class="card-seta">
       <span class="material-icons">
         keyboard_arrow_right
