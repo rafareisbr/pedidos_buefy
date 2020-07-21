@@ -4,11 +4,11 @@
       <div class="card-image">
         <v-img
           src="https://p2.trrsf.com/image/fget/cf/460/0/images.terra.com/2018/07/23/brigadeiro-vegano.jpg"
-          aspect-ratio="2.1"
+          aspect-ratio="1.8"
         />
       </div>
       <div class="content">
-        <div class="is-6 pb-2">{{ destaque.nome }}</div>
+        <div class="font-g font-strong pb-2">{{ destaque.nome }}</div>
         <div
           v-if="destaque.valor_atual !== destaque.valor_original"
           class="valores"
@@ -45,7 +45,8 @@ export default {
   overflow: hidden;
   border-radius: 1rem;
   margin-right: 15px;
-  min-width: 162px;
+  min-width: 240px;
+  height: 180px;
 }
 
 .content {
