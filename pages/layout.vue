@@ -6,7 +6,7 @@
       height="150px"
       cover
     />
-    <v-card class="blue-grey card-menu">
+    <v-card class="card-menu">
       <v-card-text>
         <div class="nomenota">
           <p class="nomenota__nome font-g font-strong">Pop Mix Gourmet</p>
@@ -14,7 +14,7 @@
           <p class="nomenota__nota font-gg font-strong">5.0</p>
         </div>
 
-        <div class="categoria mb-16">
+        <div class="categoria">
           <v-chip>Doces</v-chip>
           <v-chip>Guloseimas</v-chip>
         </div>

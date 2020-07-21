@@ -10,7 +10,6 @@
 
 <script>
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
-import 'swiper/swiper-bundle.css'
 
 export default {
   components: {

@@ -8,7 +8,6 @@
 
 <script>
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
-import 'swiper/swiper-bundle.css'
 
 import CardDestaques from '@/components/menu/CardDestaques'
 export default {

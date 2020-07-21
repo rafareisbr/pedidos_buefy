@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-app>
     <v-toolbar dense dark>
       <v-toolbar-title>
         <v-img
@@ -16,15 +16,16 @@
     </v-toolbar>
 
     <section>
-      <div>
+      <v-main>
         <nuxt />
-      </div>
+      </v-main>
     </section>
-  </div>
+  </v-app>
 </template>
 
 <script>
 import routesConstants from '@/routes.js'
+import 'swiper/swiper.scss'
 
 export default {
   data() {

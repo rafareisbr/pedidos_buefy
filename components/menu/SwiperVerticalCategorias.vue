@@ -20,7 +20,6 @@
 
 <script>
 import CardProduto from '@/components/menu/CardProduto'
-import 'swiper/swiper-bundle.css'
 
 export default {
   components: {
