@@ -25,10 +25,6 @@ export default {
       }
     ]
   },
-
-  css: {
-    extract: false
-  },
   /*
    ** Customize the progress-bar color
    */
@@ -36,7 +32,7 @@ export default {
   /*
    ** Global CSS
    */
-  css: ['assets/scss/main.scss'],
+  css: ['assets/scss/main.scss', 'swiper/swiper-bundle.css'],
   /*
    ** Plugins to load before mounting the App
    */
