@@ -2,11 +2,10 @@
   <v-app>
     <v-toolbar dense dark>
       <v-toolbar-title>
-        <v-img
-          src="../assets/images/LOGO_APP_PIBIBOX.png"
-          aspect-ratio="1.7"
-          height="150px"
-          cover
+        <img
+          src="~/assets/images/LOGO_APP_PIBIBOX.png"
+          height="30px"
+          width="30px"
         />
       </v-toolbar-title>
 
