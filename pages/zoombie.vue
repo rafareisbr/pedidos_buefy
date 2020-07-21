@@ -1,29 +1,35 @@
 <template>
   <div>
-    <v-img
-      src="https://picsum.photos/667/150?random"
-      aspect-ratio="1.7"
-      height="150px"
-      cover
-      style="border-top-right-radius: 12px; border-top-left-radius: 12px;"
-    />
-    <v-card class="card-menu">
-      <v-card-text class="pb-16">
-        <div class="nomenota">
-          <p class="nomenota__nome font-g font-strong">
+    <div v-if="loading">Carregando...</div>
+    <div v-else>
+      <!-- estabelecimento -->
+      <div class="cardapio__imagem"></div>
+
+      <v-container class="grey lighten-5">
+        <div class="nomenota column">
+          <h4 class="nomenota__nome" style="font-weight: 700">
             {{ estabelecimento.nm_fantasia }}
-          </p>
-          <p class="nomenota__bio font-m">{{ estabelecimento.bio }}</p>
-          <p class="nomenota__nota font-gg font-strong">
+          </h4>
+          <p class="nomenota__bio">{{ estabelecimento.bio }}</p>
+          <p class="nomenota__nota is-size-4">
             {{ estabelecimento.nota_avaliacoes | nota }}
           </p>
         </div>
 
-        <div class="categoria">
-          <v-chip v-for="tag in estabelecimento.tags" :key="tag">Doces</v-chip>
-        </div>
+        <v-row no-gutters>
+          <v-col
+            v-for="tag in estabelecimento.tags"
+            :key="tag"
+            cols="12"
+            sm="4"
+          >
+            <v-chip class="pa-2">
+              {{ tag }}
+            </v-chip>
+          </v-col>
+        </v-row>
 
-        <div class="abertotxentregahorarios font-weak">
+        <div class="abertotxentregahorarios">
           <!-- <div class="abertotxentregahorarios__aberto">Aberto agora</div> -->
           <div class="abertotxentregahorarios__tx_entrega">
             {{ 'R$ ' + estabelecimento.min_taxa_entrega }} -
@@ -42,30 +48,47 @@
           </div>
         </div>
 
-        <div class="mb-8">
+        <!-- swiper -->
+        <div>
           <swiper-categorias
             height="30px"
             :categorias="categorias"
             @clicked="slideTo($event)"
-          />
+          ></swiper-categorias>
         </div>
+        <!-- /swiper -->
+      </v-container>
+      <!-- /estabelecimento -->
 
-        <div class="destaques mb-5">
-          <div class="font-g font-regular">Em destaque</div>
+      <div v-if="false" class="column">
+        <!-- destaques -->
+        <div class="destaques">
+          <h4 class="is-size-5">Em destaque</h4>
           <swiper-destaques :destaques="destaques"></swiper-destaques>
         </div>
+        <!-- /destaques -->
+      </div>
 
-        <!-- produtos -->
-        <div class="produtos">
-          <swiper-vertical-categorias
-            ref="swiperCategorias"
-            :categorias="categorias"
-          >
-          </swiper-vertical-categorias>
+      <!-- produtos -->
+      <div class="column produtos">
+        <swiper-vertical-categorias
+          ref="swiperCategorias"
+          :categorias="categorias"
+        >
+        </swiper-vertical-categorias>
+      </div>
+      <!-- /produtos -->
+
+      <!-- tabs -->
+      <div class="tabs">
+        <div class="tabs__item" @click="goToCarrinho">
+          <div v-if="carrinho && carrinho.length" class="badge">
+            {{ carrinho.length }}
+          </div>
         </div>
-        <!-- /produtos -->
-      </v-card-text>
-    </v-card>
+      </div>
+      <!-- /tabs -->
+    </div>
   </div>
 </template>
 
@@ -78,6 +101,7 @@ import SwiperDestaques from '@/components/menu/SwiperDestaques'
 import SwiperVerticalCategorias from '@/components/menu/SwiperVerticalCategorias'
 
 export default {
+  name: 'Menu',
   components: {
     SwiperCategorias,
     SwiperDestaques,
@@ -129,19 +153,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.card-menu {
-  border-top-left-radius: 2em !important;
-  border-top-right-radius: 2em !important;
-  margin-top: -50px !important;
-  min-height: 100vh !important;
-  height: 100% !important;
-  padding-top: 1.5rem !important;
+.cardapio__imagem {
+  background: url(https://picsum.photos/150/300) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100px;
 }
 
 .nomenota {
   padding-top: 20px;
   margin-top: -20px;
-  padding-bottom: 0.5rem;
   background-color: white;
   border-top-left-radius: 1.5rem;
   border-top-right-radius: 1.5rem;
@@ -163,14 +186,10 @@ export default {
   }
 }
 
-.categoria {
-  margin-bottom: 1rem;
-}
-
 .abertotxentregahorarios {
   display: grid;
   grid-template-areas: '. aberto' 'txentrega horarios';
-  margin-bottom: 1rem;
+  font-weight: 300;
 
   &__aberto {
     grid-area: aberto;
@@ -187,12 +206,7 @@ export default {
   }
 }
 
-.v-chip {
-  background-color: $vermelho-fraco !important;
-  color: $vermelho-forte !important;
-}
-.v-chip-active {
-  color: $vermelho-fraco !important;
-  background-color: $vermelho-forte !important;
+.produto-categoria {
+  margin-bottom: 2rem;
 }
 </style>

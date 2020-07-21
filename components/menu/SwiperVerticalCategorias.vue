@@ -1,14 +1,14 @@
 <template>
-  <div id="categorias_swiper">
+  <div>
     <div
       v-for="categoria in categorias"
       :id="categoria.nome.replace(/ /g, '')"
       :key="categoria.nome"
-      class="produto-categoria"
+      class="mb-7"
     >
-      <h4 class="is-size-5" style="margin-bottom: 0.8rem;">
+      <p class="font-g mb-3">
         {{ categoria.nome }}
-      </h4>
+      </p>
       <card-produto
         v-for="produto in categoria.produtos"
         :key="produto.id"
@@ -36,19 +36,10 @@ export default {
   },
   methods: {
     slideTo(element) {
-      this.$scrollTo(element, { container: '#categorias_swiper' })
+      this.$scrollTo(element) // { container: '#categorias_swiper' }
     }
   }
 }
 </script>
 
-<style lang="scss">
-#categorias_swiper {
-  height: 100%;
-  overflow-y: scroll;
-}
-#categorias_swiper > * {
-  height: 150px;
-  width: 100%;
-}
-</style>
+<style lang="scss" scoped></style>
