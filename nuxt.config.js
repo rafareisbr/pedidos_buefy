@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 export default {
   mode: 'spa',
 
@@ -28,7 +27,7 @@ export default {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '#fff' },
+  loading: {},
   /*
    ** Global CSS
    */
@@ -36,7 +35,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/global.js'],
+  plugins: [],
   /*
    ** Nuxt.js dev-modules
    */
@@ -101,5 +100,5 @@ export default {
   /** Configuração da biblioteca (plugin) que coloca o scss globalmente */
   styleResources: {
     scss: ['./assets/scss/*.scss']
-  }
+  },
 }

@@ -1,19 +1,18 @@
 <template>
   <div>
-    <h1>teste</h1>
     <div v-if="produto">
-      <div style="position: relative;">
-        <div>
-          <img
-            :src="
-              produto.foto ||
-                'https://semantic-ui.com/images/wireframe/image.png'
-            "
-            style="display: block; object-fit: cover; z-index: 0;"
-            height="150px"
-            width="100%"
-          />
-        </div>
+      <div>
+<!--        <div>-->
+<!--          <img-->
+<!--            :src="-->
+<!--              produto.foto ||-->
+<!--                'https://semantic-ui.com/images/wireframe/image.png'-->
+<!--            "-->
+<!--            style="display: block; object-fit: cover; z-index: 0;"-->
+<!--            height="150px"-->
+<!--            width="100%"-->
+<!--          />-->
+<!--        </div>-->
 
         <div class="blank">
           <div style="margin-bottom: 20px;">{{ produto.descricao }}</div>
@@ -57,20 +56,20 @@ export default {
   },
   computed: {
     produto() {
-      /*
       const { categorias } = this.$store.state.menu
-      let prod = null
+
+      let _produto = null
+
       categorias.forEach((categoria) => {
         categoria.produtos.forEach((produto) => {
           if (produto.id === this.$route.params.id) {
-            prod = produto
+            _produto = produto
           }
         })
       })
-      this.defineItens(prod)
-      return prod
-      */
-      return null
+
+      this.organizaItemsDoProdutoEncontrado(_produto)
+      return _produto
     }
   },
   methods: {
@@ -82,7 +81,7 @@ export default {
         path: '/cliente/carrinho'
       })
     },
-    defineItens(produto) {
+    organizaItemsDoProdutoEncontrado(produto) {
       this.itens = produto.itens.map((item) => {
         return { item, checked: false }
       })
@@ -97,15 +96,4 @@ export default {
 </script>
 
 <style scoped>
-.blank {
-  position: absolute;
-  z-index: 5;
-  background: white;
-  width: 100%;
-  margin-top: -15px;
-  padding: 25px 15px;
-  border-top-left-radius: 25px;
-  border-top-right-radius: 25px;
-  border-radius: 25px;
-}
 </style>

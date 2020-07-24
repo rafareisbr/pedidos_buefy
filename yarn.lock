@@ -2610,6 +2610,13 @@
     lodash "^4.17.15"
     pretty "^2.0.0"
 
+"@vuetify/cli-plugin-utils@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@vuetify/cli-plugin-utils/-/cli-plugin-utils-0.0.7.tgz#103e0ce504253dbe87bc7fe7e096992beac9bf9b"
+  integrity sha512-34INe4rcsus6ByNgrpIPAyJaTRt1j+5YaMWt2Lh3iDZLn9h69tEp83Imqefze7weRbg+qukJYdnaWDFjFUAf2g==
+  dependencies:
+    semver "^7.1.2"
+
 "@webassemblyjs/ast@1.9.0":
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/@webassemblyjs/ast/-/ast-1.9.0.tgz#bd850604b4042459a5a41cd7d338cbed695ed964"
@@ -12461,6 +12468,20 @@ vue-awesome-swiper@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/vue-awesome-swiper/-/vue-awesome-swiper-4.1.1.tgz#8f7ab221ad003021d756b86aa618f429924900fe"
   integrity sha512-50um10t6N+lJaORkpwSi1wWuMmBI1sgFc9Znsi5oUykw2cO5DzLaBHcO2JNX21R+Ue4TGoIJDhhxjBHtkFrTEQ==
+
+vue-cli-plugin-vuetify-preset-basil@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/vue-cli-plugin-vuetify-preset-basil/-/vue-cli-plugin-vuetify-preset-basil-1.0.4.tgz#47ea65250169bd8ab905db5c936b2dd4e6a2579e"
+  integrity sha512-vHiMD7h8tD3xQNQjQM+twOZIUiSajufjxbYYTGyuYiRhYXm0wLYTZnWvqns2sQYVhpBDyQwgc/44IygzyhGRtA==
+  dependencies:
+    "@vuetify/cli-plugin-utils" "^0.0.7"
+
+vue-cli-plugin-vuetify-preset-crane@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/vue-cli-plugin-vuetify-preset-crane/-/vue-cli-plugin-vuetify-preset-crane-1.0.3.tgz#cff23e61487d7177943859799db397990fe3d9a6"
+  integrity sha512-1sPTBjRgreFwsvOzyauh0+h2bo7GHwyW4iJVbTc6C/SY/4cYKwTbSbNVFwwdO3l33qtw8/OUP53wikAa1nDrxA==
+  dependencies:
+    "@vuetify/cli-plugin-utils" "^0.0.7"
 
 vue-cli-plugin-vuetify@~2.0.6:
   version "2.0.6"

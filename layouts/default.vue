@@ -23,16 +23,7 @@
 </template>
 
 <script>
-import routesConstants from '@/routes.js'
 import 'swiper/swiper.scss'
-
-export default {
-  data() {
-    return {
-      items: routesConstants.routes
-    }
-  }
-}
 </script>
 
 <style lang="scss">
