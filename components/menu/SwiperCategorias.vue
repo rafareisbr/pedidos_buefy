@@ -1,20 +1,26 @@
 <template>
-  <swiper class="swiper" :options="swiperOption">
-    <swiper-slide v-for="categoria of categorias" :key="categoria.id">
-      <v-chip @click="selecionaCategoria(categoria.nome)">
-        {{ categoria.nome }}
-      </v-chip>
-    </swiper-slide>
-  </swiper>
+  <div v-swiper:swiperDeal="swiperOption" class="swiper">
+    <div class="swiper-wrapper">
+      <div
+        v-for="categoria of categorias"
+        :key="categoria.id"
+        class="swiper-slide"
+      >
+        <v-chip @click="selecionaCategoria(categoria.nome)">
+          {{ categoria.nome }}
+        </v-chip>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+import { directive } from 'vue-awesome-swiper'
 
 export default {
-  components: {
-    Swiper,
-    SwiperSlide
+  name: 'SwiperCategorias',
+  directives: {
+    swiper: directive
   },
   props: {
     categorias: {
@@ -26,7 +32,7 @@ export default {
     return {
       swiperOption: {
         slidesPerView: 'auto',
-        spaceBetween: 10
+        spaceBetween: 20
       }
     }
   },
@@ -40,14 +46,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.swiper {
-  display: flex !important;
-}
-
 .swiper-slide {
   width: fit-content !important;
 }
-
 .v-chip {
   border: 1px solid $vermelho-forte;
   background-color: #fff !important;

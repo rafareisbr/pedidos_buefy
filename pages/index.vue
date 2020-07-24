@@ -20,7 +20,7 @@
         </div>
 
         <div class="categoria">
-          <v-chip v-for="tag in estabelecimento.tags" :key="tag">Doces</v-chip>
+          <v-chip v-for="tag in estabelecimento.tags" :key="tag" class="mr-1">Doces</v-chip>
         </div>
 
         <div class="abertotxentregahorarios font-weak">
@@ -66,133 +66,133 @@
         <!-- /produtos -->
       </v-card-text>
     </v-card>
-
   </div>
 </template>
 
 <script>
-import moment from 'moment'
-import { mapState, mapGetters } from 'vuex'
+  import moment from 'moment'
+  import { mapState, mapGetters } from 'vuex'
 
-import SwiperCategorias from '@/components/menu/SwiperCategorias'
-import SwiperDestaques from '@/components/menu/SwiperDestaques'
-import SwiperVerticalCategorias from '@/components/menu/SwiperVerticalCategorias'
+  import SwiperCategorias from '@/components/menu/SwiperCategorias'
+  import SwiperDestaques from '@/components/menu/SwiperDestaques'
+  import SwiperVerticalCategorias from '@/components/menu/SwiperVerticalCategorias'
 
-export default {
-  components: {
-    SwiperCategorias,
-    SwiperDestaques,
-    SwiperVerticalCategorias
-  },
-  filters: {
-    horario: (value) => {
-      if (!value) return '-'
-      return `${moment.utc(value, 'HH:mm:ss').format('HH:mm')}hrs`
+  export default {
+    components: {
+      SwiperCategorias,
+      SwiperDestaques,
+      SwiperVerticalCategorias
     },
-    nota: (value) => {
-      if (!value) return '-'
-      return value.toFixed(1)
-    }
-  },
-  computed: {
-    ...mapState({
-      carrinho: 'carrinho/carrinho'
-    }),
-    ...mapGetters({
-      categorias: 'estabelecimento/categorias',
-      estabelecimento: 'estabelecimento/estabelecimento',
-      destaques: 'estabelecimento/destaques',
-      loading: 'estabelecimento/loading'
-    })
-  },
-  created() {
-    this.$store.dispatch('estabelecimento/fetchEstabelecimentoCategorias')
-  },
-  methods: {
-    verProduto(produto) {
-      this.$router.push({
-        path: `/menu/${produto.id}`
+    filters: {
+      horario: (value) => {
+        if (!value) return '-'
+        return `${moment.utc(value, 'HH:mm:ss').format('HH:mm')}hrs`
+      },
+      nota: (value) => {
+        if (!value) return '-'
+        return value.toFixed(1)
+      }
+    },
+    computed: {
+      ...mapState({
+        carrinho: 'carrinho/carrinho'
+      }),
+      ...mapGetters({
+        categorias: 'estabelecimento/categorias',
+        estabelecimento: 'estabelecimento/estabelecimento',
+        destaques: 'estabelecimento/destaques',
+        loading: 'estabelecimento/loading'
       })
     },
-    goToCarrinho() {
-      this.$router.push({
-        path: '/cliente/carrinho'
-      })
+    created() {
+      this.$store.dispatch('estabelecimento/fetchEstabelecimentoCategorias')
     },
-    getImgUrl(value) {
-      return `https://picsum.photos/id/43${value}/1230/500`
-    },
-    slideTo(categoriaId) {
-      this.$refs.swiperCategorias.slideTo(categoriaId)
+    methods: {
+      verProduto(produto) {
+        this.$router.push({
+          path: `/menu/${produto.id}`
+        })
+      },
+      goToCarrinho() {
+        this.$router.push({
+          path: '/cliente/carrinho'
+        })
+      },
+      getImgUrl(value) {
+        return `https://picsum.photos/id/43${value}/1230/500`
+      },
+      slideTo(categoriaId) {
+        this.$refs.swiperCategorias.slideTo(categoriaId)
+      }
     }
   }
-}
 </script>
 
 <style lang="scss" scoped>
-.card-menu {
-  border-top-left-radius: 2em !important;
-  border-top-right-radius: 2em !important;
-  margin-top: -50px !important;
-  width: 100%;
-  padding-top: 1.5rem !important;
-}
-
-.nomenota {
-  padding-top: 20px;
-  margin-top: -20px;
-  padding-bottom: 0.5rem;
-  background-color: white;
-  border-top-left-radius: 1.5rem;
-  border-top-right-radius: 1.5rem;
-
-  display: grid;
-  grid-template-areas: 'nome nota' 'bio nota';
-
-  &__nome {
-    grid-area: nome;
+  .card-menu {
+    border-top-left-radius: 2em !important;
+    border-top-right-radius: 2em !important;
+    margin-top: -50px !important;
+    width: 100%;
+    padding-top: 1.5rem !important;
   }
 
-  &__bio {
-    grid-area: bio;
+  .nomenota {
+    padding-top: 20px;
+    margin-top: -20px;
+    padding-bottom: 0.5rem;
+    background-color: white;
+    border-top-left-radius: 1.5rem;
+    border-top-right-radius: 1.5rem;
+
+    display: grid;
+    grid-template-areas: 'nome nota' 'bio nota';
+
+    &__nome {
+      grid-area: nome;
+    }
+
+    &__bio {
+      grid-area: bio;
+    }
+
+    &__nota {
+      grid-area: nota;
+      text-align: right;
+    }
   }
 
-  &__nota {
-    grid-area: nota;
-    text-align: right;
-  }
-}
-
-.categoria {
-  margin-bottom: 1rem;
-}
-
-.abertotxentregahorarios {
-  display: grid;
-  grid-template-areas: '. aberto' 'txentrega horarios';
-  margin-bottom: 1rem;
-
-  &__aberto {
-    grid-area: aberto;
-    text-align: right;
+  .categoria {
+    margin-bottom: 1rem;
   }
 
-  &__tx_entrega {
-    grid-area: txentrega;
+  .abertotxentregahorarios {
+    display: grid;
+    grid-template-areas: '. aberto' 'txentrega horarios';
+    margin-bottom: 1rem;
+
+    &__aberto {
+      grid-area: aberto;
+      text-align: right;
+    }
+
+    &__tx_entrega {
+      grid-area: txentrega;
+    }
+
+    &__horarios {
+      grid-area: horarios;
+      text-align: right;
+    }
   }
 
-  &__horarios {
-    grid-area: horarios;
-    text-align: right;
+  .v-chip {
+    background-color: $vermelho-fraco !important;
+    color: $vermelho-forte !important;
   }
-}
 
-.v-chip {
-  background-color: $vermelho-fraco !important;
-  color: $vermelho-forte !important;
-}
-.v-chip-active {
-  color: $vermelho-fraco !important;
-  background-color: $vermelho-forte !important;
-}
+  .v-chip-active {
+    color: $vermelho-fraco !important;
+    background-color: $vermelho-forte !important;
+  }
 </style>

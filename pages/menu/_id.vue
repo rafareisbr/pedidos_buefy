@@ -7,7 +7,7 @@
         gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
         height="200px"
       >
-        <v-card-title v-text="Titulo"></v-card-title>
+        <v-card-title>Titulo</v-card-title>
       </v-img>
 
       <v-card-subtitle class="pb-0">Number 10</v-card-subtitle>
@@ -17,7 +17,7 @@
 
         <div>Whitsunday Island, Whitsunday Islands</div>
 
-        <v-divider/>
+        <v-divider />
 
         <div>Whitehaven Beach</div>
 
@@ -91,9 +91,7 @@
   import { mapGetters } from 'vuex'
 
   export default {
-    layout(context) {
-      return 'detalhes'
-    },
+    layout:'detalhes',
     transition: 'slide-left',
     components: {},
     data: () => {

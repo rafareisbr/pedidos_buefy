@@ -1,19 +1,27 @@
 <template>
-  <swiper class="swiper" :options="swiperOption">
-    <swiper-slide v-for="destaque of destaques" :key="destaque.id">
-      <card-destaques :destaque="destaque"></card-destaques>
-    </swiper-slide>
-  </swiper>
+  <div v-swiper:swiperDeal="swiperOption" class="swiper">
+    <div class="swiper-wrapper">
+      <div
+        v-for="destaque of destaques"
+        :key="destaque.id"
+        class="swiper-slide"
+      >
+        <card-destaques :destaque="destaque"></card-destaques>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+import { directive } from 'vue-awesome-swiper'
 
 import CardDestaques from '@/components/menu/CardDestaques'
 export default {
+  name: 'SwiperDestaques',
+  directives: {
+    swiper: directive
+  },
   components: {
-    Swiper,
-    SwiperSlide,
     CardDestaques
   },
   props: {
