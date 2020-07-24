@@ -5,9 +5,9 @@
       aspect-ratio="1.7"
       height="150px"
       cover
-      style="border-top-right-radius: 12px; border-top-left-radius: 12px;"
     />
-    <v-card class="card-menu">
+
+    <v-card class="card-menu fill-height">
       <v-card-text class="pb-16">
         <div class="nomenota">
           <p class="nomenota__nome font-g font-strong">
@@ -66,6 +66,7 @@
         <!-- /produtos -->
       </v-card-text>
     </v-card>
+
   </div>
 </template>
 
@@ -133,8 +134,7 @@ export default {
   border-top-left-radius: 2em !important;
   border-top-right-radius: 2em !important;
   margin-top: -50px !important;
-  min-height: 100vh !important;
-  height: 100% !important;
+  width: 100%;
   padding-top: 1.5rem !important;
 }
 

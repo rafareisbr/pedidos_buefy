@@ -12476,7 +12476,7 @@ vue-cli-plugin-vuetify-preset-basil@^1.0.4:
   dependencies:
     "@vuetify/cli-plugin-utils" "^0.0.7"
 
-vue-cli-plugin-vuetify-preset-crane@^1.0.3:
+vue-cli-plugin-vuetify-preset-crane@~1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/vue-cli-plugin-vuetify-preset-crane/-/vue-cli-plugin-vuetify-preset-crane-1.0.3.tgz#cff23e61487d7177943859799db397990fe3d9a6"
   integrity sha512-1sPTBjRgreFwsvOzyauh0+h2bo7GHwyW4iJVbTc6C/SY/4cYKwTbSbNVFwwdO3l33qtw8/OUP53wikAa1nDrxA==
