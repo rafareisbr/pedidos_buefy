@@ -11,7 +11,7 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       {
         hid: 'description',
-        name: 'description',
+        name: 'Pibibox',
         content: process.env.npm_package_description || ''
       }
     ],
@@ -31,7 +31,7 @@ export default {
   /*
    ** Global CSS
    */
-  css: [
+  css:[
     'assets/scss/main.scss',
     'swiper/swiper-bundle.css'
   ],

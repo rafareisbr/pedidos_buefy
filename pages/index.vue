@@ -20,7 +20,9 @@
         </div>
 
         <div class="categoria">
-          <v-chip v-for="tag in estabelecimento.tags" :key="tag" class="mr-1">Doces</v-chip>
+          <v-chip v-for="tag in estabelecimento.tags" :key="tag" class="mr-1"
+            >Doces</v-chip
+          >
         </div>
 
         <div class="abertotxentregahorarios font-weak">
@@ -104,7 +106,7 @@
         loading: 'estabelecimento/loading'
       })
     },
-    created() {
+    created: function() {
       this.$store.dispatch('estabelecimento/fetchEstabelecimentoCategorias')
     },
     methods: {
@@ -141,7 +143,6 @@
     padding-top: 20px;
     margin-top: -20px;
     padding-bottom: 0.5rem;
-    background-color: white;
     border-top-left-radius: 1.5rem;
     border-top-right-radius: 1.5rem;
 

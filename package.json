@@ -2,7 +2,7 @@
   "name": "pibibox",
   "version": "1.0.0",
   "private": true,
-  "description": "My best Nuxt.js project",
+  "description": "Pibibox",
   "author": "Rafael Reis",
   "scripts": {
     "build": "nuxt build",

@@ -1,147 +1,164 @@
 <template>
-  <div>
-    <v-card>
+  <div class="fill-height">
+    <v-card class="fill-height">
       <v-img
-        src="https://semantic-ui.com/images/wireframe/image.png"
-        class="white--text align-end"
-        gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-        height="200px"
+        src="https://picsum.photos/667/150?random"
+        class="align-end"
+        height="150px"
       >
-        <v-card-title>Titulo</v-card-title>
       </v-img>
 
-      <v-card-subtitle class="pb-0">Number 10</v-card-subtitle>
+      <v-card-text>
+        <div class="font-g font-strong mb-4">
+          {{ produto ? produto.nome : '' }}
+        </div>
+        <p class="font-m mb-4">{{ produto ? produto.descricao : '' }}</p>
 
-      <v-card-text class="text--primary">
-        <div>Whitehaven Beach</div>
+        <div
+          v-if="produto && produto.valor_original && produto.valor_atual"
+          class="mb-4"
+        >
+          <div
+            v-if="produto.valor_original !== produto.valor_atual"
+            class="font-s mr-2 d-flex justify-space-between full-width"
+          >
+            <div class="font-m font-weak" style="text-decoration: line-through">
+              De R${{ produto.valor_original.toFixed(2) }}
+            </div>
+            <div>
+              Por:
+              <span class="font-g" style="color: green;">
+                R${{ produto.valor_atual.toFixed(2) }}</span
+              >
+            </div>
+          </div>
+          <div v-else>
+            <div class="font-weak" style="text-align: right;">
+              Valor:
+              <span class="font-g font-regular" style="color: green;">
+                R${{ produto.valor_atual.toFixed(2) }}</span
+              >
+            </div>
+          </div>
+        </div>
 
-        <div>Whitsunday Island, Whitsunday Islands</div>
+        <v-divider class="mb-3" />
 
-        <v-divider />
+        <h3>Itens:</h3>
+        <div v-for="item of itens" :key="item.item.id" class="mb-5">
+          <div class="produto__item">
+            <div>{{ item.item.nome }}</div>
+            <input
+              id="nome"
+              v-model.number="item.quantidade"
+              min="0"
+              :max="item.item.limite"
+              type="number"
+            />
+          </div>
+        </div>
 
-        <div>Whitehaven Beach</div>
+        <v-divider class="mb-4"></v-divider>
 
-        <div>Whitsunday Island, Whitsunday Islands</div>
+        <div class="mb-2">Qual a quantidade?</div>
+        <input
+          class="mb-3"
+          v-model.number="quantidade"
+          min="0"
+          type="number"
+        />
+
+        <v-divider class="mb-4"></v-divider>
+
+        <div>
+          <div class="mb-2">Alguma Observação?</div>
+          <v-textarea
+            outlined
+            rows="3"
+            placeholder="Informe aqui"
+            v-model="observacao"
+          ></v-textarea>
+        </div>
+
+        <div>
+          <v-btn
+            block
+            dark
+            @click="
+              addProdutoToCarrinho({ produto, itens, quantidade, observacao })
+            "
+            >Adicionar à Cesta {{
+          }}</v-btn>
+        </div>
       </v-card-text>
-
-      <v-card-actions>
-        <v-spacer></v-spacer>
-
-        <v-btn icon>
-          <v-icon>mdi-heart</v-icon>
-        </v-btn>
-
-        <v-btn icon>
-          <v-icon>mdi-bookmark</v-icon>
-        </v-btn>
-
-        <v-btn icon>
-          <v-icon>mdi-share-variant</v-icon>
-        </v-btn>
-      </v-card-actions>
     </v-card>
-
   </div>
-
-  <!--  <div>-->
-  <!--    <v-card-text class="fill-height">dosaidnsoaidns</v-card-text>-->
-  <!--    <div v-if="produto">-->
-  <!--      <div>-->
-  <!--        <img-->
-  <!--          :src="-->
-  <!--            produto.foto || 'https://semantic-ui.com/images/wireframe/image.png'-->
-  <!--          "-->
-  <!--          style="display: block; object-fit: cover; z-index: 0;"-->
-  <!--          height="150px"-->
-  <!--          width="100%"-->
-  <!--        />-->
-  <!--      </div>-->
-
-
-  <!--      <div class="blank">-->
-  <!--        <div style="margin-bottom: 20px;">{{ produto.descricao }}</div>-->
-
-  <!--        &lt;!&ndash; Itens/Opções de escolha &ndash;&gt;-->
-  <!--        <div v-show="itens.length">-->
-  <!--          <div v-for="item of itens" :key="item.item.id">-->
-  <!--            <div-->
-  <!--              style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #ccc;"-->
-  <!--            >-->
-  <!--              <div>{{ item.item.nome }}</div>-->
-  <!--              <input id="nome" v-model="item.checked" type="checkbox"/>-->
-  <!--            </div>-->
-  <!--          </div>-->
-  <!--        </div>-->
-  <!--      </div>-->
-  <!--    </div>-->
-
-  <!--    <div>-->
-  <!--      <input v-model="quantidade" :min="1" :max="100"/>-->
-  <!--      <button-->
-  <!--        type="button"-->
-  <!--        @click="addProdutoToCarrinho({ produto, itens, quantidade })"-->
-  <!--      >-->
-  <!--        Adicionar ao Carrinho-->
-  <!--      </button>-->
-  <!--    </div>-->
-  <!--  </div>-->
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 
-  export default {
-    layout:'detalhes',
-    transition: 'slide-left',
-    components: {},
-    data: () => {
-      return {
-        quantidade: 1,
-        itens: []
-      }
+export default {
+  components: {},
+  layout: 'detalhes',
+  transition: 'slide-left',
+  data: () => {
+    return {
+      quantidade: 1,
+      itens: [],
+      observacao: ''
+    }
+  },
+  computed: {
+    ...mapGetters({
+      categorias: 'estabelecimento/categorias'
+    }),
+    produto() {
+      let _produto = null
+
+      this.categorias.forEach((categoria) => {
+        categoria.produtos.forEach((produto) => {
+          if (produto.id === this.$route.params.id) {
+            _produto = produto
+          }
+        })
+      })
+      this.organizaItemsDoProdutoEncontrado(_produto)
+      return _produto
+    }
+  },
+  methods: {
+    addProdutoToCarrinho(produto) {
+      console.log(produto)
+      console.log(this.observacao)
+      // this.$store.commit('carrinho/addProdutoToCarrinho', produto)
+      // Toast('Item adicionado ao carrinho')
+      // this.$router.push({
+      //   path: '/cliente/carrinho'
+      // })
     },
-    computed: {
-      ...mapGetters({
-        categorias: 'estabelecimento/categorias'
-      }),
-      produto() {
-        let _produto = null
-
-        this.categorias.forEach((categoria) => {
-          categoria.produtos.forEach((produto) => {
-            if (produto.id === this.$route.params.id) {
-              _produto = produto
-            }
-          })
-        })
-
-        this.organizaItemsDoProdutoEncontrado(_produto)
-        return _produto
-      }
+    organizaItemsDoProdutoEncontrado(produto) {
+      this.itens = produto.itens.map((item) => {
+        return { item, quantidade: 0 }
+      })
     },
-    methods: {
-      addProdutoToCarrinho(produto) {
-        this.$store.commit('carrinho/addProdutoToCarrinho', produto)
-        // this.$store.dispatch('carrinho/addProdutoToCarrinho', produto)
-        // Toast('Item adicionado ao carrinho')
-        this.$router.push({
-          path: '/cliente/carrinho'
-        })
-      },
-      organizaItemsDoProdutoEncontrado(produto) {
-        this.itens = produto.itens.map((item) => {
-          return { item, checked: false }
-        })
-      },
-      onClickVoltar() {
-        this.$router.push({
-          path: '/cliente/menu'
-        })
-      }
+    onClickVoltar() {
+      this.$router.push({
+        path: '/cliente/menu'
+      })
     }
   }
+}
 </script>
 
 <style lang="scss" scoped>
-
+.produto__item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #ccc;
+}
+.v-btn {
+  background-color: $vermelho-forte !important;
+}
 </style>

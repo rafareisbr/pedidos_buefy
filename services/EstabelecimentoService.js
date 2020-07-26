@@ -13,5 +13,8 @@ const apiClient = axios.create({
 export default {
   getCardapio() {
     return apiClient.get('/cardapio')
+  },
+  getProdutoById(id) {
+    return apiClient.get('/produtos/' + id)
   }
 }
