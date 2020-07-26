@@ -61,22 +61,17 @@
         <v-divider class="mb-4"></v-divider>
 
         <div class="mb-2">Qual a quantidade?</div>
-        <input
-          class="mb-3"
-          v-model.number="quantidade"
-          min="0"
-          type="number"
-        />
+        <input v-model.number="quantidade" class="mb-3" min="0" type="number" />
 
         <v-divider class="mb-4"></v-divider>
 
         <div>
           <div class="mb-2">Alguma Observação?</div>
           <v-textarea
+            v-model="observacao"
             outlined
             rows="3"
             placeholder="Informe aqui"
-            v-model="observacao"
           ></v-textarea>
         </div>
 
@@ -85,13 +80,32 @@
             block
             dark
             @click="
-              addProdutoToCarrinho({ produto, itens, quantidade, observacao })
+              addProdutoToCarrinho()
             "
             >Adicionar à Cesta {{
           }}</v-btn>
         </div>
       </v-card-text>
     </v-card>
+
+    <v-snackbar
+      v-model="snackbar"
+      timeout="3000"
+      dismissible="true"
+      color="success"
+    >
+      Seu produto foi adicionado à cesta.
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          text
+          color="success"
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
+          x
+        </v-btn>
+      </template>
+    </v-snackbar>
   </div>
 </template>
 
@@ -106,7 +120,8 @@ export default {
     return {
       quantidade: 1,
       itens: [],
-      observacao: ''
+      observacao: '',
+      snackbar: false
     }
   },
   computed: {
@@ -128,14 +143,20 @@ export default {
     }
   },
   methods: {
-    addProdutoToCarrinho(produto) {
-      console.log(produto)
-      console.log(this.observacao)
-      // this.$store.commit('carrinho/addProdutoToCarrinho', produto)
-      // Toast('Item adicionado ao carrinho')
-      // this.$router.push({
-      //   path: '/cliente/carrinho'
-      // })
+    addProdutoToCarrinho() {
+      const _produto = Object.assign(
+        {},
+        this.produto,
+        this.itens,
+        this.quantidade,
+        this.observacao
+      )
+      console.log(_produto)
+      this.$store.commit('carrinho/addProdutoToCarrinho', _produto)
+      this.snackbar = true
+      this.$router.push({
+        path: '/'
+      })
     },
     organizaItemsDoProdutoEncontrado(produto) {
       this.itens = produto.itens.map((item) => {

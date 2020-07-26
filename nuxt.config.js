@@ -31,10 +31,7 @@ export default {
   /*
    ** Global CSS
    */
-  css:[
-    'assets/scss/main.scss',
-    'swiper/swiper-bundle.css'
-  ],
+  css: ['assets/scss/main.scss', 'swiper/swiper-bundle.css'],
   /*
    ** Plugins to load before mounting the App
    */
@@ -103,5 +100,5 @@ export default {
   /** Configuração da biblioteca (plugin) que coloca o scss globalmente */
   styleResources: {
     scss: ['./assets/scss/*.scss']
-  },
+  }
 }

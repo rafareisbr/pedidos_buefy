@@ -5,7 +5,7 @@
         <v-icon>mdi-arrow-left</v-icon>
       </v-btn>
 
-<!--      <v-toolbar-title>Title</v-toolbar-title>-->
+      <!--      <v-toolbar-title>Title</v-toolbar-title>-->
 
       <v-spacer></v-spacer>
 
@@ -21,11 +21,11 @@
 </template>
 
 <script>
-  export default {
-    methods: {
-      retornarAoInicio() {
-        this.$router.push({ path: '/' })
-      }
+export default {
+  methods: {
+    retornarAoInicio() {
+      this.$router.push({ path: '/' })
     }
   }
+}
 </script>
