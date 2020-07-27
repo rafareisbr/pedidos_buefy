@@ -61,7 +61,13 @@
         <v-divider class="mb-4"></v-divider>
 
         <div class="mb-2">Qual a quantidade?</div>
-        <input v-model.number="quantidade" class="mb-3" min="0" type="number" />
+        <input
+          v-model.number="quantidade"
+          class="mb-3"
+          min="1"
+          max="50"
+          type="number"
+        />
 
         <v-divider class="mb-4"></v-divider>
 
@@ -76,36 +82,12 @@
         </div>
 
         <div>
-          <v-btn
-            block
-            dark
-            @click="
-              addProdutoToCarrinho()
-            "
-            >Adicionar à Cesta {{
-          }}</v-btn>
+          <v-btn block dark @click="addProdutoToCarrinho()"
+            >Adicionar à Cesta - R${{ precoTotalProduto | preco }}
+          </v-btn>
         </div>
       </v-card-text>
     </v-card>
-
-    <v-snackbar
-      v-model="snackbar"
-      timeout="3000"
-      dismissible="true"
-      color="success"
-    >
-      Seu produto foi adicionado à cesta.
-      <template v-slot:action="{ attrs }">
-        <v-btn
-          text
-          color="success"
-          v-bind="attrs"
-          @click="snackbar = false"
-        >
-          x
-        </v-btn>
-      </template>
-    </v-snackbar>
   </div>
 </template>
 
@@ -113,6 +95,12 @@
 import { mapGetters } from 'vuex'
 
 export default {
+  filters: {
+    preco: (value) => {
+      if (!value) return '-'
+      return value.toFixed(2)
+    }
+  },
   components: {},
   layout: 'detalhes',
   transition: 'slide-left',
@@ -120,8 +108,7 @@ export default {
     return {
       quantidade: 1,
       itens: [],
-      observacao: '',
-      snackbar: false
+      observacao: ''
     }
   },
   computed: {
@@ -130,7 +117,6 @@ export default {
     }),
     produto() {
       let _produto = null
-
       this.categorias.forEach((categoria) => {
         categoria.produtos.forEach((produto) => {
           if (produto.id === this.$route.params.id) {
@@ -140,20 +126,29 @@ export default {
       })
       this.organizaItemsDoProdutoEncontrado(_produto)
       return _produto
+    },
+    precoTotalItems() {
+      let _total = 0
+
+      this.itens.forEach((item) => {
+        _total += item.item.valor * item.quantidade
+      })
+
+      return _total
+    },
+    precoTotalProduto() {
+      return this.produto.valor_atual * this.quantidade + this.precoTotalItems
     }
   },
   methods: {
     addProdutoToCarrinho() {
-      const _produto = Object.assign(
-        {},
-        this.produto,
-        this.itens,
-        this.quantidade,
-        this.observacao
-      )
-      console.log(_produto)
-      this.$store.commit('carrinho/addProdutoToCarrinho', _produto)
-      this.snackbar = true
+      const _produto = {
+        produto: this.produto,
+        itens: this.itens,
+        quantidade: this.quantidade,
+        observacao: this.observacao
+      }
+      this.$store.dispatch('carrinho/addProdutoToCarrinho', _produto)
       this.$router.push({
         path: '/'
       })
