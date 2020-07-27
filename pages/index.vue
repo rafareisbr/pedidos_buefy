@@ -8,7 +8,6 @@
     />
 
     <v-card class="card-menu fill-height">
-
       <v-card-text class="pb-16">
         <div class="nomenota">
           <p class="nomenota__nome font-g font-strong">
@@ -67,6 +66,17 @@
           </swiper-vertical-categorias>
         </div>
         <!-- /produtos -->
+
+        <v-btn
+          v-if="produtosNoCarrinho.length > 0"
+          fixed
+          depressed
+          dark
+          bottom
+          class="btn__carrinho"
+        >
+          Carrinho Ativo
+        </v-btn>
       </v-card-text>
     </v-card>
   </div>
@@ -74,7 +84,7 @@
 
 <script>
 import moment from 'moment'
-import { mapState, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 
 import SwiperCategorias from '@/components/menu/SwiperCategorias'
 import SwiperDestaques from '@/components/menu/SwiperDestaques'
@@ -97,14 +107,17 @@ export default {
     }
   },
   computed: {
+    /*
     ...mapState({
-      carrinho: 'carrinho/carrinho'
+      produtosSelecionados:
     }),
+    */
     ...mapGetters({
       categorias: 'estabelecimento/categorias',
       estabelecimento: 'estabelecimento/estabelecimento',
       destaques: 'estabelecimento/destaques',
-      loading: 'estabelecimento/loading'
+      loading: 'estabelecimento/loading',
+      produtosNoCarrinho: 'carrinho/produtosSelecionados'
     })
   },
   created() {
@@ -196,5 +209,11 @@ export default {
 .v-chip-active {
   color: $vermelho-fraco !important;
   background-color: $vermelho-forte !important;
+}
+
+.btn__carrinho {
+  background-color: $vermelho-forte !important;
+  width: calc(100% - 2rem);
+  z-index: 5;
 }
 </style>

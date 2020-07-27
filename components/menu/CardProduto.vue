@@ -37,17 +37,17 @@
                 </div>
                 <div>
                   Por
-                  <span class="font-g" style="color: green;">{{
-                    produto.valor_atual.toFixed(2)
-                  }}</span>
+                  <span class="font-g" style="color: green;">
+                    R${{ produto.valor_atual.toFixed(2) }}</span
+                  >
                 </div>
               </div>
               <div v-else>
                 <div class="font-weak" style="text-align: right;">
                   Valor:
-                  <span class="font-g font-regular" style="color: green;">{{
-                    produto.valor_atual.toFixed(2)
-                  }}</span>
+                  <span class="font-g font-regular" style="color: green;">
+                    R${{ produto.valor_atual.toFixed(2) }}</span
+                  >
                 </div>
               </div>
             </div>
