@@ -137,7 +137,12 @@ export default {
       return _total
     },
     precoTotalProduto() {
-      return this.produto.valor_atual * this.quantidade + this.precoTotalItems
+      if (this.produto) {
+        return (
+          this.quantidade * (this.produto.valor_atual + this.precoTotalItems)
+        )
+      }
+      return 0.0
     }
   },
   methods: {
@@ -154,9 +159,11 @@ export default {
       })
     },
     organizaItemsDoProdutoEncontrado(produto) {
-      this.itens = produto.itens.map((item) => {
-        return { item, quantidade: 0 }
-      })
+      if (this.itens && this.itens.length > 0) {
+        this.itens = produto.itens.map((item) => {
+          return { item, quantidade: 0 }
+        })
+      }
     },
     onClickVoltar() {
       this.$router.push({

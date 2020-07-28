@@ -5,7 +5,9 @@
         <v-icon>mdi-arrow-left</v-icon>
       </v-btn>
 
-      <v-toolbar-title>{{ estabelecimento ? estabelecimento.nome : '' }}</v-toolbar-title>
+      <v-toolbar-title>{{
+        estabelecimento ? estabelecimento.nome : ''
+      }}</v-toolbar-title>
 
       <v-spacer></v-spacer>
 

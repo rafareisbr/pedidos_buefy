@@ -73,6 +73,7 @@
           depressed
           dark
           bottom
+          @click="navegarParaCesta()"
           class="btn__carrinho"
         >
           Carrinho Ativo
@@ -127,6 +128,11 @@ export default {
     verProduto(produto) {
       this.$router.push({
         path: `/menu/${produto.id}`
+      })
+    },
+    navegarParaCesta() {
+      this.$router.push({
+        path: `/cesta`
       })
     },
     goToCarrinho() {
