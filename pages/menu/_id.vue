@@ -55,19 +55,14 @@
               :max="item.item.limite"
               type="number"
             />
+            <b-numberinput controls-rounded></b-numberinput>
           </div>
         </div>
 
         <v-divider class="mb-4"></v-divider>
 
         <div class="mb-2">Qual a quantidade?</div>
-        <input
-          v-model.number="quantidade"
-          class="mb-3"
-          min="1"
-          max="50"
-          type="number"
-        />
+        <b-numberinput class="mb-3" v-model="quantidade" controls-rounded min="1" max="50"></b-numberinput>
 
         <v-divider class="mb-4"></v-divider>
 

@@ -1,3 +1,5 @@
+import colors from 'vuetify/lib/util/colors';
+
 export default {
   mode: 'spa',
 
@@ -31,11 +33,14 @@ export default {
   /*
    ** Global CSS
    */
-  css: ['assets/scss/main.scss', 'swiper/swiper-bundle.css'],
+  css: ['assets/scss/main.scss'],
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: [
+    { src: '@/plugins/awesomeSwiper.js', ssr: false },
+    { src: '@/plugins/buefy.js' }
+  ],
   /*
    ** Nuxt.js dev-modules
    */
@@ -82,6 +87,7 @@ export default {
     /*
      ** You can extend webpack config here
      */
+    transpile: ['vue-cli-plugin-vuetify-preset-crane'],
     extend(config, ctx) {}
   },
 
@@ -100,5 +106,22 @@ export default {
   /** Configuração da biblioteca (plugin) que coloca o scss globalmente */
   styleResources: {
     scss: ['./assets/scss/*.scss']
+  },
+
+  vuetify: {
+    preset: 'vue-cli-plugin-vuetify-preset-crane/preset',
+    theme: {
+      themes: {
+        light: {
+          primary: colors.purple,
+          secondary: colors.grey.darken1,
+          accent: colors.shades.black,
+          error: colors.red.accent3
+        },
+        dark: {
+          // colors
+        }
+      }
+    }
   }
 }
