@@ -48,21 +48,14 @@
         <div v-for="item of itens" :key="item.item.id" class="mb-5">
           <div class="produto__item">
             <div>{{ item.item.nome }}</div>
-            <input
-              id="nome"
-              v-model.number="item.quantidade"
-              min="0"
-              :max="item.item.limite"
-              type="number"
-            />
-            <b-numberinput controls-rounded></b-numberinput>
+            <b-numberinput size="is-small" controls-rounded v-model="item.quantidade" min="0" :max="item.item.limite"></b-numberinput>
           </div>
         </div>
 
         <v-divider class="mb-4"></v-divider>
 
         <div class="mb-2">Qual a quantidade?</div>
-        <b-numberinput class="mb-3" v-model="quantidade" controls-rounded min="1" max="50"></b-numberinput>
+        <b-numberinput class="mb-3 " size="is-small" v-model="quantidade" controls-rounded min="1" max="50"></b-numberinput>
 
         <v-divider class="mb-4"></v-divider>
 
@@ -119,7 +112,7 @@ export default {
           }
         })
       })
-      this.organizaItemsDoProdutoEncontrado(_produto)
+      console.log(_produto)
       return _produto
     },
     precoTotalItems() {
@@ -144,6 +137,8 @@ export default {
     addProdutoToCarrinho() {
       const _produto = {
         produto: this.produto,
+        precoTotalItems: this.precoTotalItems,
+        precoTotalProduto: this.precoTotalProduto,
         itens: this.itens,
         quantidade: this.quantidade,
         observacao: this.observacao
@@ -154,7 +149,7 @@ export default {
       })
     },
     organizaItemsDoProdutoEncontrado(produto) {
-      if (this.itens && this.itens.length > 0) {
+      if (produto && produto.itens.length > 0) {
         this.itens = produto.itens.map((item) => {
           return { item, quantidade: 0 }
         })
@@ -165,6 +160,9 @@ export default {
         path: '/cliente/menu'
       })
     }
+  },
+  created() {
+      this.organizaItemsDoProdutoEncontrado(this.produto)
   }
 }
 </script>
