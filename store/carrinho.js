@@ -1,5 +1,6 @@
 export default {
   state: () => ({
+    dialog: false,
     produtosSelecionados: [],
     cliente: {
       primeiro_nome: 'Sebastião',
@@ -19,6 +20,19 @@ export default {
     },
     limparCarrinho({ commit }) {
       commit('LIMPAR_CARRINHO')
+    },
+    alterarQuantidadeDeProduto({ commit }, { quantidade, produto }) {
+      if (quantidade === 0) {
+        commit('SHOW_DIALOG')
+      } else {
+        commit('SET_PRODUTO_BY_ID', { quantidade, produto })
+      }
+    },
+    removerProduto({ commit }, id) {
+      commit('REMOVER_ITEM_NO_CARRINHO', id)
+    },
+    fecharDialog({ commit }) {
+      commit('HIDE_DIALOG')
     }
   },
 
@@ -28,12 +42,32 @@ export default {
     },
     LIMPAR_CARRINHO(state) {
       state.produtosSelecionados = []
+    },
+    SET_PRODUTO_BY_ID(state, { produto, quantidade }) {
+      const produtoIndex = state.produtosSelecionados.findIndex(
+        (item) => item.id === produto.id
+      )
+      state.produtosSelecionados[produtoIndex].quantidade = quantidade
+    },
+    REMOVER_ITEM_NO_CARRINHO(state, id) {
+      state.produtosSelecionados = state.produtosSelecionados.filter(
+        (item) => item.id !== id
+      )
+    },
+    SHOW_DIALOG(state) {
+      state.dialog = true
+    },
+    HIDE_DIALOG(state) {
+      state.dialog = false
     }
   },
 
   getters: {
     produtosSelecionados(state) {
       return state.produtosSelecionados
+    },
+    dialog(state) {
+      return state.dialog
     }
   }
 }

@@ -14,7 +14,7 @@
       </v-btn>
     </v-app-bar>
 
-    <div id="content">
+    <v-container id="content">
       <div>
         <div class="d-flex">
           <v-avatar color="teal" size="48">
@@ -25,44 +25,48 @@
         <p>Voltar a loja</p>
       </div>
 
-      {{ produtos }}
-      <v-list two-line subheader>
-        <v-list-item
-          v-for="produto in produtosNoCarrinho"
-          :key="produto.produto.id"
-          @click="() => {}"
-        >
-          <v-list-item-avatar>
-            <v-img src="https://picsum.photos/667/150?random"></v-img>
-          </v-list-item-avatar>
-
-          <v-list-item-content>
-            <v-list-item-title
-              v-text="produto.produto.nome"
-            ></v-list-item-title>
-            <v-list-item-subtitle
-              v-text="produto.produto.descricao"
-            ></v-list-item-subtitle>
-          </v-list-item-content>
-
-          <v-list-item-action>
-            <b-numberinput
-              class="mb-3"
-              size="is-small"
-              v-model="produto.quantidade"
-              controls-rounded
-              min="1"
-              max="50"
-            ></b-numberinput>
-          </v-list-item-action>
-        </v-list-item>
-      </v-list>
+      <v-divider />
 
       <h1>Itens Adicionados</h1>
-      <div v-for="produto of produtosNoCarrinho" :key="produto.produto.id">
-        {{ produto.produto.nome }}
+      <div
+        v-for="produto in produtosNoCarrinho"
+        :key="produto.produto.id"
+        style="display: flex; justify-content: space-between; align-items: center;"
+      >
+        <div
+          style="display: flex; align-items: center; justify-content: space-between;"
+        >
+          <div class="mr-2">{{ produto.produto.nome }}</div>
+          <div>{{ produto.produto.preco }}</div>
+        </div>
+        <div>
+          <b-numberinput
+            :value="produto.quantidade"
+            controls-rounded
+            max="50"
+            min="0"
+            size="is-small"
+            @input="onInputProdutoQuantidade($event, produto)"
+          ></b-numberinput>
+        </div>
+
+        <v-dialog v-model="dialog" persistent max-width="290">
+          <v-card>
+            <v-card-title class="headline"
+              >Tem certeza que deseja remover o item do carrinho?</v-card-title
+            >
+            <v-card-text
+              >Você irá remover o item do carrinho. Tem certeza?</v-card-text
+            >
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn text @click="fecharDialog">Não</v-btn>
+              <v-btn text @click="removerItem(produto.id)">Sim</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </div>
-    </div>
+    </v-container>
   </div>
 </template>
 
@@ -71,22 +75,30 @@ import { mapGetters } from 'vuex'
 
 export default {
   layout: 'cru',
-  data() {
-    return {
-      produtos: []
-    }
-  },
   computed: {
     ...mapGetters({
       estabelecimento: 'estabelecimento/estabelecimento',
+      dialog: 'carrinho/dialog',
       produtosNoCarrinho: 'carrinho/produtosSelecionados'
-    }),
+    })
   },
   methods: {
     voltar() {
       this.$router.push('/')
+    },
+    onInputProdutoQuantidade(quantidade, produto) {
+      this.$store.dispatch('carrinho/alterarQuantidadeDeProduto', {
+        quantidade,
+        produto
+      })
+    },
+    removerItem(produtoId) {
+      this.$store.dispatch('carrinho/removerProduto', produtoId)
+    },
+    fecharDialog() {
+      this.$store.dispatch('carrinho/fecharDialog')
     }
-  },
+  }
 }
 </script>
 
