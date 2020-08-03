@@ -39,7 +39,7 @@ export default {
    */
   plugins: [
     { src: '@/plugins/awesomeSwiper.js', ssr: false },
-    { src: '@/plugins/buefy.js' }
+    { src: '@/plugins/vueSax.js', ssr: true }
   ],
   /*
    ** Nuxt.js dev-modules

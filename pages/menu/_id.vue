@@ -48,14 +48,27 @@
         <div v-for="item of itens" :key="item.item.id" class="mb-5">
           <div class="produto__item">
             <div>{{ item.item.nome }}</div>
-            <b-numberinput size="is-small" controls-rounded v-model="item.quantidade" min="0" :max="item.item.limite"></b-numberinput>
+            <vs-input-number
+              v-model="item.quantidade"
+              class="mb-3"
+              min="0"
+              :max="item.item.limite"
+              :is-disabled="true"
+            />
           </div>
         </div>
 
         <v-divider class="mb-4"></v-divider>
 
         <div class="mb-2">Qual a quantidade?</div>
-        <b-numberinput class="mb-3 " size="is-small" v-model="quantidade" controls-rounded min="1" max="50"></b-numberinput>
+
+        <vs-input-number
+          v-model="quantidade"
+          class="mb-3"
+          min="1"
+          max="50"
+          :is-disabled="true"
+        />
 
         <v-divider class="mb-4"></v-divider>
 

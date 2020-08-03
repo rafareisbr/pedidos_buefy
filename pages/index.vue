@@ -108,11 +108,6 @@ export default {
     }
   },
   computed: {
-    /*
-    ...mapState({
-      produtosSelecionados:
-    }),
-    */
     ...mapGetters({
       categorias: 'estabelecimento/categorias',
       estabelecimento: 'estabelecimento/estabelecimento',

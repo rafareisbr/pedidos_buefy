@@ -14,7 +14,7 @@
       </v-btn>
     </v-app-bar>
 
-    <div id="content">
+    <v-container id="content">
       <div>
         <div class="d-flex">
           <v-avatar color="teal" size="48">
@@ -25,44 +25,47 @@
         <p>Voltar a loja</p>
       </div>
 
-      {{ produtos }}
-      <v-list two-line subheader>
-        <v-list-item
-          v-for="produto in produtosNoCarrinho"
-          :key="produto.produto.id"
-          @click="() => {}"
+      <v-divider />
+
+      <h3>Itens Adicionados</h3>
+      <div
+        v-for="item in produtosNoCarrinho"
+        :key="item.id"
+        style="display: flex; justify-content: space-between; align-items: center;"
+      >
+        <div
+          style="display: flex; align-items: center; justify-content: space-between;"
         >
-          <v-list-item-avatar>
-            <v-img src="https://picsum.photos/667/150?random"></v-img>
-          </v-list-item-avatar>
+          <div class="mr-2">{{ item.produto.nome }}</div>
+          <div>{{ item.produto.preco }}</div>
+        </div>
+        <div>
+          <vs-input-number
+            :value="item.quantidade"
+            :is-disabled="true"
+            @input="updateItem($event, item)"
+          />
+        </div>
 
-          <v-list-item-content>
-            <v-list-item-title
-              v-text="produto.produto.nome"
-            ></v-list-item-title>
-            <v-list-item-subtitle
-              v-text="produto.produto.descricao"
-            ></v-list-item-subtitle>
-          </v-list-item-content>
-
-          <v-list-item-action>
-            <b-numberinput
-              class="mb-3"
-              size="is-small"
-              v-model="produto.quantidade"
-              controls-rounded
-              min="1"
-              max="50"
-            ></b-numberinput>
-          </v-list-item-action>
-        </v-list-item>
-      </v-list>
-
-      <h1>Itens Adicionados</h1>
-      <div v-for="produto of produtosNoCarrinho" :key="produto.produto.id">
-        {{ produto.produto.nome }}
       </div>
-    </div>
+    </v-container>
+
+    <v-dialog v-model="dialog" persistent max-width="310">
+      <v-card>
+        <v-card-title style="line-break: normal !important;">
+          Você tem certeza?
+        </v-card-title>
+        <v-card-text
+        >Você confirma que está removendo o item da sua
+          cesta?</v-card-text
+        >
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn text @click="fecharDialog">Não</v-btn>
+          <v-btn text @click="removerItem">Sim</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -74,14 +77,34 @@ export default {
   computed: {
     ...mapGetters({
       estabelecimento: 'estabelecimento/estabelecimento',
+      dialog: 'carrinho/dialog',
       produtosNoCarrinho: 'carrinho/produtosSelecionados'
     })
   },
   methods: {
     voltar() {
       this.$router.push('/')
+    },
+    lookupQuantidade(id) {
+      return this.$store.getters['carrinho/getItemById'](id).quantidade
+    },
+    updateItem(event, item) {
+      const quantidade = parseInt(event)
+      this.$store.dispatch('carrinho/updateItemFromCarrinho', {
+        quantidade,
+        item
+      })
+    },
+    removerItem() {
+      this.$store.dispatch('carrinho/removeItemFromCarrinho')
+    },
+    fecharDialog() {
+      this.$store.dispatch('carrinho/fecharDialog')
     }
   },
+  created() {
+    this.$store.dispatch('carrinho/fecharDialog')
+  }
 }
 </script>
 

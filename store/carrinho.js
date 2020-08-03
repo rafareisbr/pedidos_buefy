@@ -1,7 +1,13 @@
 import * as uuid from 'uuid'
 
+function itemById(state, itemID) {
+  return state.produtosSelecionados.find((item) => item.id === itemID)
+}
+
 export default {
   state: () => ({
+    dialog: false,
+    item_a_remover: null,
     produtosSelecionados: [],
     cliente: {
       primeiro_nome: 'Sebastião',
@@ -20,14 +26,24 @@ export default {
       item.id = uuid.v4()
       commit('ADD_ITEM_CARRINHO', item)
     },
-    updateItemToCarrinho({ commit }, { id, item }) {
-      commit('UPDATE_ITEM_CARRINHO', { id, item })
+    updateItemFromCarrinho({ commit }, { quantidade, item }) {
+      if (quantidade === 0) {
+        commit('SET_ITEM_A_REMOVER', item)
+        return commit('SHOW_DIALOG')
+      } else {
+        return commit('UPDATE_ITEM_CARRINHO', { quantidade, item })
+      }
     },
-    removeItemFromCarrinho({ commit }, id) {
-      commit('REMOVE_ITEM_CARRINHO', id)
+    removeItemFromCarrinho({ state, commit }) {
+      commit('REMOVE_ITEM_CARRINHO', state.item_a_remover.id)
+      commit('HIDE_DIALOG')
+      commit('SET_ITEM_A_REMOVER', null)
     },
     limparCarrinho({ commit }) {
       commit('LIMPAR_CARRINHO')
+    },
+    fecharDialog({ commit }) {
+      commit('HIDE_DIALOG')
     }
   },
 
@@ -35,22 +51,28 @@ export default {
     ADD_ITEM_CARRINHO(state, produto) {
       state.produtosSelecionados.push(produto)
     },
-    UPDATE_ITEM_CARRINHO(state, { id, item }) {
-      const itemEncontrado = this.itemById(id)
-      if(itemEncontrado) {
-        state.produtosSelecionados = state.produtosSelecionados.filter(
-          (item) => item.id === itemEncontrado.id
-        )
-        state.produtosSelecionados.push(item)
+    UPDATE_ITEM_CARRINHO(state, { quantidade, item }) {
+      const itemEncontrado = itemById(state, item.id)
+      if (itemEncontrado) {
+        itemEncontrado.quantidade = quantidade
       }
     },
     REMOVE_ITEM_CARRINHO(state, id) {
       state.produtosSelecionados = state.produtosSelecionados.filter(
-        (item) => item.id === id
+        (item) => item.id !== id
       )
     },
     LIMPAR_CARRINHO(state) {
       state.produtosSelecionados = []
+    },
+    SHOW_DIALOG(state) {
+      state.dialog = true
+    },
+    HIDE_DIALOG(state) {
+      state.dialog = false
+    },
+    SET_ITEM_A_REMOVER(state, item) {
+      state.item_a_remover = item
     }
   },
 
@@ -58,8 +80,11 @@ export default {
     produtosSelecionados(state) {
       return state.produtosSelecionados
     },
-    itemById: (state) => (id) => {
-      return state.produtosSelecionados((item) => item.id === id)
+    getItemById: (state) => (id) => {
+      return state.produtosSelecionados.find((item) => item.id === id)
+    },
+    dialog(state) {
+      return state.dialog
     }
   }
 }
