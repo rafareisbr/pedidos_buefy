@@ -38,7 +38,7 @@ export default {
    ** Plugins to load before mounting the App
    */
   plugins: [
-    { src: '@/plugins/awesomeSwiper.js', ssr: false },
+    { src: '@/plugins/awesomeSwiper.js', ssr: false, mode: 'client' },
     { src: '@/plugins/vueSax.js', ssr: true }
   ],
   /*

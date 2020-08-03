@@ -76,7 +76,7 @@
           @click="navegarParaCesta()"
           class="btn__carrinho"
         >
-          Carrinho Ativo
+          MINHA CESTA - R$ {{ valorTotalProdutosSelecionados }}
         </v-btn>
       </v-card-text>
     </v-card>
@@ -113,7 +113,8 @@ export default {
       estabelecimento: 'estabelecimento/estabelecimento',
       destaques: 'estabelecimento/destaques',
       loading: 'estabelecimento/loading',
-      produtosNoCarrinho: 'carrinho/produtosSelecionados'
+      produtosNoCarrinho: 'carrinho/produtosSelecionados',
+      valorTotalProdutosSelecionados: 'carrinho/valorTotalProdutosSelecionados',
     })
   },
   created() {

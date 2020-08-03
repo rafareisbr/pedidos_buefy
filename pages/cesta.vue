@@ -29,6 +29,7 @@
 
       <h3>Itens Adicionados</h3>
       <div
+        class="mb-6"
         v-for="item in produtosNoCarrinho"
         :key="item.id"
         style="display: flex; justify-content: space-between; align-items: center;"
@@ -47,7 +48,28 @@
           />
         </div>
       </div>
-      Total: R$ {{ valorTotalProdutosSelecionados }}
+
+      <div style="display: flex; align-items: center; justify-content: center">
+        <v-btn class="button__adc-mais mb-4" v-if="produtosNoCarrinho.length > 0" outlined @click="voltarParaAdcMaisItens">
+          Adicionar mais itens
+        </v-btn>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: center">
+        <v-btn class="mb-6" v-if="produtosNoCarrinho.length > 0" text @click="limparCesta">
+          Limpar Cesta
+        </v-btn>
+      </div>
+
+      <v-btn
+        v-if="produtosNoCarrinho.length > 0"
+        depressed
+        dark
+        block
+        class="btn__carrinho"
+        @click="() => {}"
+      >
+        CONTINUAR R$ {{ valorTotalProdutosSelecionados }}
+      </v-btn>
     </v-container>
 
     <v-dialog v-model="dialog" persistent max-width="310">
@@ -55,10 +77,7 @@
         <v-card-title style="line-break: normal !important;">
           Você tem certeza?
         </v-card-title>
-        <v-card-text
-        >Você confirma que está removendo o item da sua
-          cesta?</v-card-text
-        >
+        <v-card-text>Você confirma que está removendo o item da sua cesta?</v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn text @click="fecharDialog">Não</v-btn>
@@ -101,6 +120,12 @@ export default {
     },
     fecharDialog() {
       this.$store.dispatch('carrinho/fecharDialog')
+    },
+    limparCesta() {
+      this.$store.dispatch('carrinho/limparCesta')
+    },
+    voltarParaAdcMaisItens() {
+      this.$router.push('/')
     }
   },
   created() {
@@ -109,4 +134,9 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+  .button__adc-mais {
+    border: 2px solid $vermelho-forte !important;
+    color: $vermelho-forte !important;
+  }
+</style>

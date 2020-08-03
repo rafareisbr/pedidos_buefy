@@ -39,8 +39,8 @@ export default {
       commit('HIDE_DIALOG')
       commit('SET_ITEM_A_REMOVER', null)
     },
-    limparCarrinho({ commit }) {
-      commit('LIMPAR_CARRINHO')
+    limparCesta({ commit }) {
+      commit('LIMPAR_CESTA')
     },
     fecharDialog({ commit }) {
       commit('HIDE_DIALOG')
@@ -62,7 +62,7 @@ export default {
         (item) => item.id !== id
       )
     },
-    LIMPAR_CARRINHO(state) {
+    LIMPAR_CESTA(state) {
       state.produtosSelecionados = []
     },
     SHOW_DIALOG(state) {
