@@ -46,8 +46,8 @@
             @input="updateItem($event, item)"
           />
         </div>
-
       </div>
+      Total: R$ {{ valorTotalProdutosSelecionados }}
     </v-container>
 
     <v-dialog v-model="dialog" persistent max-width="310">
@@ -78,7 +78,8 @@ export default {
     ...mapGetters({
       estabelecimento: 'estabelecimento/estabelecimento',
       dialog: 'carrinho/dialog',
-      produtosNoCarrinho: 'carrinho/produtosSelecionados'
+      produtosNoCarrinho: 'carrinho/produtosSelecionados',
+      valorTotalProdutosSelecionados: 'carrinho/valorTotalProdutosSelecionados',
     })
   },
   methods: {

@@ -83,6 +83,18 @@ export default {
     getItemById: (state) => (id) => {
       return state.produtosSelecionados.find((item) => item.id === id)
     },
+    valorTotalItem: (getters) => (id) => {
+      const item = getters.getItemById(id)
+      return parseFloat(item.precoTotalProduto) * parseFloat(item.quantidade)
+    },
+    valorTotalProdutosSelecionados(getters) {
+      let total = 0.0
+      getters.produtosSelecionados.forEach((item) => {
+        total +=
+          parseFloat(item.precoTotalProduto) * parseFloat(item.quantidade)
+      })
+      return total.toFixed(2)
+    },
     dialog(state) {
       return state.dialog
     }
