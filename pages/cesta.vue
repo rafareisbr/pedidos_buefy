@@ -71,16 +71,11 @@ import { mapGetters } from 'vuex'
 
 export default {
   layout: 'cru',
-  data() {
-    return {
-      produtos: []
-    }
-  },
   computed: {
     ...mapGetters({
       estabelecimento: 'estabelecimento/estabelecimento',
       produtosNoCarrinho: 'carrinho/produtosSelecionados'
-    }),
+    })
   },
   methods: {
     voltar() {

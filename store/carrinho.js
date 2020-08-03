@@ -1,3 +1,5 @@
+import * as uuid from 'uuid'
+
 export default {
   state: () => ({
     produtosSelecionados: [],
@@ -14,8 +16,15 @@ export default {
   }),
 
   actions: {
-    addProdutoToCarrinho({ commit }, produto) {
-      commit('SET_PRODUTO_NO_CARRINHO', produto)
+    addItemToCarrinho({ commit }, item) {
+      item.id = uuid.v4()
+      commit('ADD_ITEM_CARRINHO', item)
+    },
+    updateItemToCarrinho({ commit }, { id, item }) {
+      commit('UPDATE_ITEM_CARRINHO', { id, item })
+    },
+    removeItemFromCarrinho({ commit }, id) {
+      commit('REMOVE_ITEM_CARRINHO', id)
     },
     limparCarrinho({ commit }) {
       commit('LIMPAR_CARRINHO')
@@ -23,8 +32,22 @@ export default {
   },
 
   mutations: {
-    SET_PRODUTO_NO_CARRINHO(state, produto) {
+    ADD_ITEM_CARRINHO(state, produto) {
       state.produtosSelecionados.push(produto)
+    },
+    UPDATE_ITEM_CARRINHO(state, { id, item }) {
+      const itemEncontrado = this.itemById(id)
+      if(itemEncontrado) {
+        state.produtosSelecionados = state.produtosSelecionados.filter(
+          (item) => item.id === itemEncontrado.id
+        )
+        state.produtosSelecionados.push(item)
+      }
+    },
+    REMOVE_ITEM_CARRINHO(state, id) {
+      state.produtosSelecionados = state.produtosSelecionados.filter(
+        (item) => item.id === id
+      )
     },
     LIMPAR_CARRINHO(state) {
       state.produtosSelecionados = []
@@ -34,6 +57,9 @@ export default {
   getters: {
     produtosSelecionados(state) {
       return state.produtosSelecionados
+    },
+    itemById: (state) => (id) => {
+      return state.produtosSelecionados((item) => item.id === id)
     }
   }
 }

@@ -143,7 +143,7 @@ export default {
         quantidade: this.quantidade,
         observacao: this.observacao
       }
-      this.$store.dispatch('carrinho/addProdutoToCarrinho', _produto)
+      this.$store.dispatch('carrinho/addItemToCarrinho', _produto)
       this.$router.push({
         path: '/'
       })
@@ -162,7 +162,7 @@ export default {
     }
   },
   created() {
-      this.organizaItemsDoProdutoEncontrado(this.produto)
+    this.organizaItemsDoProdutoEncontrado(this.produto)
   }
 }
 </script>
