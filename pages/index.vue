@@ -30,8 +30,7 @@
 
         <div class="categoria">
           <v-chip v-for="tag in estabelecimento.tags" :key="tag" class="mr-1"
-            >Doces</v-chip
-          >
+            >{{ tag }}</v-chip>
         </div>
 
         <div class="abertotxentregahorarios font-weak">

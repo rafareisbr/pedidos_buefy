@@ -1,15 +1,14 @@
 <template>
-  <div v-swiper:swiperDeal="swiperOption" class="swiper">
-    <div class="swiper-wrapper">
-      <div
-        v-for="destaque of destaques"
-        :key="destaque.id"
-        class="swiper-slide"
-      >
-        <card-destaques :destaque="destaque"></card-destaques>
-      </div>
-    </div>
-  </div>
+  <v-slide-group>
+    <v-slide-item
+      class="my-4 mr-4"
+      v-for="destaque of destaques"
+      :key="destaque.id"
+      v-slot:default="{ active, toggle }"
+    >
+      <card-destaques :destaque="destaque"></card-destaques>
+    </v-slide-item>
+  </v-slide-group>
 </template>
 
 <script>

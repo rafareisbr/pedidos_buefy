@@ -1,17 +1,36 @@
 <template>
-  <div v-swiper:swiperDeal="swiperOption" class="swiper">
-    <div class="swiper-wrapper">
-      <div
-        v-for="categoria of categorias"
-        :key="categoria.id"
-        class="swiper-slide"
+<!--  <div v-swiper:swiperDeal="swiperOption" class="swiper">-->
+<!--    <div class="swiper-wrapper">-->
+<!--      <div-->
+<!--        v-for="categoria of categorias"-->
+<!--        :key="categoria.id"-->
+<!--        class="swiper-slide"-->
+<!--      >-->
+<!--        <v-chip @click="selecionaCategoria(categoria.nome)">-->
+<!--          {{ categoria.nome }}-->
+<!--        </v-chip>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+
+  <v-slide-group>
+    <v-slide-item
+      v-for="categoria of categorias"
+      :key="categoria.id"
+      v-slot:default="{ active, toggle }"
+    >
+      <v-btn
+        class="mx-2"
+        :input-value="active"
+        active-class="purple white--text"
+        depressed
+        rounded
+        @click="selecionaCategoria(categoria.nome)"
       >
-        <v-chip @click="selecionaCategoria(categoria.nome)">
-          {{ categoria.nome }}
-        </v-chip>
-      </div>
-    </div>
-  </div>
+        {{ categoria.nome }}
+      </v-btn>
+    </v-slide-item>
+  </v-slide-group>
 </template>
 
 <script>
