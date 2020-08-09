@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar app dense flat color="white">
+    <v-app-bar app dense flat color="grey lighten-4">
       <v-btn icon @click="voltar()">
         <v-icon>mdi-arrow-left</v-icon>
       </v-btn>
@@ -75,6 +75,7 @@
         depressed
         dark
         block
+        height="50"
         class="btn__carrinho"
         @click="irParaPedido"
       >

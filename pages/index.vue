@@ -14,9 +14,18 @@
             {{ estabelecimento.nm_fantasia }}
           </p>
           <p class="nomenota__bio font-m">{{ estabelecimento.bio }}</p>
-          <p class="nomenota__nota font-gg font-strong">
-            {{ estabelecimento.nota_avaliacoes | nota }}
-          </p>
+          <div
+            class="nomenota__nota font-gg font-strong d-flex align-center justify-end"
+          >
+            <v-rating
+              v-model="estabelecimento.nota_avaliacoes"
+              background-color="indigo lighten-3"
+              color="yellow"
+              length="1"
+              :half-increments="true"
+            ></v-rating>
+            <span>{{ estabelecimento.nota_avaliacoes | nota }}</span>
+          </div>
         </div>
 
         <div class="categoria">
@@ -26,7 +35,7 @@
         </div>
 
         <div class="abertotxentregahorarios font-weak">
-          <!-- <div class="abertotxentregahorarios__aberto">Aberto agora</div> -->
+
           <div class="abertotxentregahorarios__tx_entrega">
             {{ 'R$ ' + estabelecimento.min_taxa_entrega }} -
             {{ 'R$ ' + estabelecimento.max_taxa_entrega }}
@@ -70,14 +79,14 @@
         <v-btn
           v-if="produtosNoCarrinho.length > 0"
           fixed
-          depressed
+          height="50"
           dark
           bottom
           class="btn__carrinho"
           @click="navegarParaCesta()"
         >
           <v-row
-            class="px-2 font-weight-light"
+            class="px-2 py-4 font-weight-light"
             align="center"
             justify="space-between"
           >

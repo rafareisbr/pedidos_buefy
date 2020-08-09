@@ -1,6 +1,6 @@
 <template>
   <div class="fill-height">
-    <v-app-bar app dense flat color="white">
+    <v-app-bar app dense flat color="grey lighten-4">
       <v-btn light icon @click="onClickVoltar()">
         <v-icon>mdi-arrow-left</v-icon>
       </v-btn>
