@@ -73,10 +73,20 @@
           depressed
           dark
           bottom
-          @click="navegarParaCesta()"
           class="btn__carrinho"
+          @click="navegarParaCesta()"
         >
-          MINHA CESTA - R$ {{ valorTotalProdutosSelecionados }}
+          <v-row
+            class="px-2 font-weight-light"
+            align="center"
+            justify="space-between"
+          >
+            <div>
+              <v-icon size="12">fas fa-shopping-basket</v-icon>
+              <span>MINHA CESTA</span>
+            </div>
+            <div>R$ {{ valorTotalProdutosSelecionados }}</div>
+          </v-row>
         </v-btn>
       </v-card-text>
     </v-card>

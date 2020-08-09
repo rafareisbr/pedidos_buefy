@@ -83,7 +83,7 @@ export default {
     getItemById: (state) => (id) => {
       return state.produtosSelecionados.find((item) => item.id === id)
     },
-    valorTotalItem: (getters) => (id) => {
+    valorTotalItemCarrinho: (getters) => (id) => {
       const item = getters.getItemById(id)
       return parseFloat(item.precoTotalProduto) * parseFloat(item.quantidade)
     },
@@ -94,6 +94,9 @@ export default {
           parseFloat(item.precoTotalProduto) * parseFloat(item.quantidade)
       })
       return total.toFixed(2)
+    },
+    quantidadeProdutos(state) {
+      return state.produtosSelecionados.length
     },
     dialog(state) {
       return state.dialog

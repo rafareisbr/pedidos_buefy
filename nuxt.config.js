@@ -1,4 +1,4 @@
-import colors from 'vuetify/lib/util/colors';
+import colors from 'vuetify/lib/util/colors'
 
 export default {
   mode: 'spa',
@@ -110,6 +110,9 @@ export default {
 
   vuetify: {
     preset: 'vue-cli-plugin-vuetify-preset-crane/preset',
+    icons: {
+      iconfont: 'fa'
+    },
     theme: {
       themes: {
         light: {

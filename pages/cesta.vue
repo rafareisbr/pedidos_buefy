@@ -29,9 +29,9 @@
 
       <h3>Itens Adicionados</h3>
       <div
-        class="mb-6"
         v-for="item in produtosNoCarrinho"
         :key="item.id"
+        class="mb-6"
         style="display: flex; justify-content: space-between; align-items: center;"
       >
         <div
@@ -50,12 +50,22 @@
       </div>
 
       <div style="display: flex; align-items: center; justify-content: center">
-        <v-btn class="button__adc-mais mb-4" v-if="produtosNoCarrinho.length > 0" outlined @click="voltarParaAdcMaisItens">
+        <v-btn
+          v-if="produtosNoCarrinho.length > 0"
+          class="button__adc-mais mb-4"
+          outlined
+          @click="voltarParaAdcMaisItens"
+        >
           Adicionar mais itens
         </v-btn>
       </div>
       <div style="display: flex; align-items: center; justify-content: center">
-        <v-btn class="mb-6" v-if="produtosNoCarrinho.length > 0" text @click="limparCesta">
+        <v-btn
+          v-if="produtosNoCarrinho.length > 0"
+          class="mb-6"
+          text
+          @click="limparCesta"
+        >
           Limpar Cesta
         </v-btn>
       </div>
@@ -66,9 +76,19 @@
         dark
         block
         class="btn__carrinho"
-        @click="() => {}"
+        @click="irParaPedido"
       >
-        CONTINUAR R$ {{ valorTotalProdutosSelecionados }}
+        <v-row
+          class="px-2 font-weight-light"
+          align="center"
+          justify="space-between"
+        >
+          <div>
+            <v-icon size="12">fas fa-shopping-basket</v-icon>
+            <span>CONTINUAR</span>
+          </div>
+          <div>R$ {{ valorTotalProdutosSelecionados }}</div>
+        </v-row>
       </v-btn>
     </v-container>
 
@@ -77,7 +97,9 @@
         <v-card-title style="line-break: normal !important;">
           Você tem certeza?
         </v-card-title>
-        <v-card-text>Você confirma que está removendo o item da sua cesta?</v-card-text>
+        <v-card-text
+          >Você confirma que está removendo o item da sua cesta?</v-card-text
+        >
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn text @click="fecharDialog">Não</v-btn>
@@ -93,17 +115,31 @@ import { mapGetters } from 'vuex'
 
 export default {
   layout: 'cru',
+  filters: {
+    preco: (value) => {
+      if (!value) return '-'
+      return value.toFixed(2)
+    }
+  },
   computed: {
     ...mapGetters({
       estabelecimento: 'estabelecimento/estabelecimento',
       dialog: 'carrinho/dialog',
       produtosNoCarrinho: 'carrinho/produtosSelecionados',
-      valorTotalProdutosSelecionados: 'carrinho/valorTotalProdutosSelecionados',
+      valorTotalProdutosSelecionados: 'carrinho/valorTotalProdutosSelecionados'
     })
+  },
+  created() {
+    this.$store.dispatch('carrinho/fecharDialog')
   },
   methods: {
     voltar() {
       this.$router.push('/')
+    },
+    irParaPedido() {
+      this.$router.push({
+        path: '/pedido'
+      })
     },
     lookupQuantidade(id) {
       return this.$store.getters['carrinho/getItemById'](id).quantidade
@@ -127,16 +163,16 @@ export default {
     voltarParaAdcMaisItens() {
       this.$router.push('/')
     }
-  },
-  created() {
-    this.$store.dispatch('carrinho/fecharDialog')
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  .button__adc-mais {
-    border: 2px solid $vermelho-forte !important;
-    color: $vermelho-forte !important;
-  }
+.button__adc-mais {
+  border: 2px solid $vermelho-forte !important;
+  color: $vermelho-forte !important;
+}
+.btn__carrinho {
+  background-color: $vermelho-forte !important;
+}
 </style>
